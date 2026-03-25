@@ -276,3 +276,134 @@ td.td-mat-shared {
 .katex-display {
   margin: 0 !important;
 }
+
+.neq-card {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  background: var(--page);
+  margin-bottom: 48px;
+  overflow: hidden;
+}
+
+.neq-block {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+
+.neq-label {
+  flex: 0 0 180px;
+  background: var(--col-label-bg);
+  border-right: 1px solid var(--col-label-border);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9.5px;
+  color: var(--accent-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 18px 14px;
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+.neq-label--math {
+  flex: 0 0 180px;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 9px;
+}
+
+.neq-body {
+  flex: 1;
+  padding: 22px 28px;
+  background: var(--col-lin-m-bg);
+}
+
+.neq-prose {
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.neq-eq {
+  text-align: center;
+  font-size: 14px;
+  line-height: 2.2;
+  overflow-x: auto;
+}
+
+.neq-eq-bullet {
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.neq-divider {
+  height: 1px;
+  background: var(--col-lin-m-border);
+}
+
+.neq-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.neq-list li {
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.8;
+  padding-left: 22px;
+  position: relative;
+}
+
+.neq-list li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--accent-teal);
+  font-weight: 600;
+}
+
+.note-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 4px 0;
+}
+
+.note-item {
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+.note-pro {
+  background: #eef7ee;
+  border-left: 3px solid #7bbf7b;
+}
+
+.note-con {
+  background: #fff5ee;
+  border-left: 3px solid #e0a070;
+}
+
+.note-tag {
+  display: block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-style: normal;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--ink-3);
+}

@@ -96,15 +96,11 @@
               <th class="th-empty" rowspan="2"></th>
               <th colspan="2" class="th-vec">
                 <span class="text-upper">Vector Notation</span>
-                <span class="header-desc"
-                  >one observation</span
-                >
+                <span class="header-desc">one observation</span>
               </th>
               <th colspan="2">
                 <span class="text-upper">Matrix Notation</span>
-                <span class="header-desc"
-                  >all observations at once</span
-                >
+                <span class="header-desc">all observations at once</span>
               </th>
             </tr>
             <tr class="sub-header">
@@ -390,6 +386,115 @@
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+
+    <h2 class="section-title">
+      Normal Equation (Analytical/Closed-Form Solution for Linear Regression)
+    </h2>
+    <div class="neq-card">
+      <div class="neq-block">
+        <div class="neq-label text-upper">Setup</div>
+        <div class="neq-body">
+          <p class="neq-prose" style="text-align: center">
+            Prepend a row of ones to \(X\) to absorb the bias \(b\) into the
+            augmented weight vector \(\tilde{W}\):
+          </p>
+          <div class="eq neq-eq">
+            \(\tilde{W} = \begin{bmatrix} b \\ w_1 \\ \vdots \\ w_n
+            \end{bmatrix}_{(n+1)\times 1},\qquad \tilde{X} = \begin{bmatrix} 1 &
+            1 & \cdots & 1 \\ x_1^{(1)} & x_1^{(2)} & \cdots & x_1^{(m)} \\
+            \vdots & \vdots & \ddots & \vdots \\ x_n^{(1)} & x_n^{(2)} & \cdots
+            & x_n^{(m)} \end{bmatrix}_{(n+1)\times m}\)
+          </div>
+        </div>
+      </div>
+
+      <div class="neq-divider"></div>
+
+      <div class="neq-block">
+        <div class="neq-label text-upper">Model</div>
+        <div class="neq-body">
+          <div class="eq neq-eq">\(Y = \tilde{W}^{\top}\tilde{X}\)</div>
+        </div>
+      </div>
+
+      <div class="neq-divider"></div>
+
+      <div class="neq-block">
+        <div class="neq-label text-upper">Cost Function</div>
+        <div class="neq-body">
+          <div class="eq neq-eq">
+            \(J(\tilde{W}) = \dfrac{1}{m}\left\|\tilde{W}^{\top}\tilde{X} -
+            Y_{\text{true}}\right\|_{\!F}^{2}\)
+          </div>
+        </div>
+      </div>
+
+      <div class="neq-divider"></div>
+
+      <div class="neq-block">
+        <div class="neq-label text-upper">Closed-Form Solution</div>
+        <div class="neq-body">
+          <p class="neq-prose" style="text-align: center">
+            On setting \(\nabla_{\tilde{W}}\,J = 0\) and solving the resulting
+            system of equations, we get:
+          </p>
+          <div class="eq neq-eq">
+            \(\tilde{W} =
+            \left(\tilde{X}\tilde{X}^{\top}\right)^{-1}\tilde{X}\,Y_{\text{true}}^{\top}\)
+          </div>
+        </div>
+      </div>
+
+      <div class="neq-divider"></div>
+
+      <div class="neq-block">
+        <div class="neq-label text-upper">Non-Invertible Case</div>
+        <div class="neq-body">
+          <p class="neq-prose">
+            When features are
+            <em>linearly dependent</em> (multicollinearity) or when \(m \leq
+            n\), \(\tilde{X}\tilde{X}^\top\) is not invertible. In such cases,
+            there are two alternative approaches:
+          </p>
+          <ul class="neq-list">
+            <li>
+              <strong>Moore–Penrose pseudoinverse</strong> → replace
+              \(\left(\tilde{X}\tilde{X}^{\top}\right)^{-1}\tilde{X}\) with the
+              pseudoinverse: \(\tilde{W} =
+              \tilde{X}^{+}\,Y_{\text{true}}^{\top}\)
+            </li>
+            <li>
+              <strong>Regularisation (ridge regression)</strong> → add \(\lambda
+              I\) to make the matrix invertible: \(\tilde{W} =
+              \left(\tilde{X}\tilde{X}^{\top} + \lambda
+              I\right)^{-1}\tilde{X}\,Y_{\text{true}}^{\top}\)
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="neq-divider"></div>
+
+      <div class="neq-block">
+        <div class="neq-label text-upper">Complexity &amp; Trade-offs</div>
+        <div class="neq-body">
+          <div class="note-grid">
+            <div class="note-item note-pro">
+              <span class="note-tag">Advantages</span>
+              No learning rate \(\alpha\) or iterations needed — one-shot
+              solution. No feature scaling required.
+            </div>
+            <div class="note-item note-con">
+              <span class="note-tag">Disadvantages</span>
+              Only applicable to <em>linear regression</em>. Time complexity
+              \(\mathcal{O}(n^3)\) due to matrix inversion — very slow for \(n
+              \gtrsim 10{,}000\). Gradient descent is \(\mathcal{O}(mn)\) per
+              iteration and scales better.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

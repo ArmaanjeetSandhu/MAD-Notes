@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regression</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+    <link rel="stylesheet" href="01_styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <h2 class="section-title">Data Matrix Blueprint</h2>
+      <div class="table-wrap">
+        <table class="dataset-table">
+          <thead>
+            <tr class="top-header">
+              <th style="width: 25%">
+                <span class="text-upper">Observations \ Features</span>
+              </th>
+              <th>\(x_1\)</th>
+              <th>\(x_2\)</th>
+              <th>\(x_3\)</th>
+              <th>\(\dots\)</th>
+              <th>\(x_n\)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-label">1</td>
+              <td>\(x_1^{(1)}\)</td>
+              <td>\(x_2^{(1)}\)</td>
+              <td>\(x_3^{(1)}\)</td>
+              <td>\(\dots\)</td>
+              <td>\(x_n^{(1)}\)</td>
+            </tr>
+            <tr>
+              <td class="td-label">2</td>
+              <td>\(x_1^{(2)}\)</td>
+              <td>\(x_2^{(2)}\)</td>
+              <td>\(x_3^{(2)}\)</td>
+              <td>\(\dots\)</td>
+              <td>\(x_n^{(2)}\)</td>
+            </tr>
+            <tr>
+              <td class="td-label">3</td>
+              <td>\(x_1^{(3)}\)</td>
+              <td>\(x_2^{(3)}\)</td>
+              <td>\(x_3^{(3)}\)</td>
+              <td>\(\dots\)</td>
+              <td>\(x_n^{(3)}\)</td>
+            </tr>
+            <tr>
+              <td class="td-label">\(\vdots\)</td>
+              <td>\(\vdots\)</td>
+              <td>\(\vdots\)</td>
+              <td>\(\vdots\)</td>
+              <td>\(\ddots\)</td>
+              <td>\(\vdots\)</td>
+            </tr>
+            <tr>
+              <td class="td-label">m</td>
+              <td>\(x_1^{(m)}\)</td>
+              <td>\(x_2^{(m)}\)</td>
+              <td>\(x_3^{(m)}\)</td>
+              <td>\(\dots\)</td>
+              <td>\(x_n^{(m)}\)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="section-title">Model Equations</h2>
+      <div class="table-wrap">
+        <table class="main-table">
+          <colgroup>
+            <col class="c-label" />
+            <col class="c-lin-v" />
+            <col class="c-log-v" />
+            <col class="c-lin-m" />
+            <col class="c-log-m" />
+          </colgroup>
+
+          <thead>
+            <tr class="top-header">
+              <th class="th-empty" rowspan="2"></th>
+              <th colspan="2" class="th-vec">
+                <span class="text-upper">Vector Notation</span>
+                <span class="header-desc"
+                  >one observation</span
+                >
+              </th>
+              <th colspan="2">
+                <span class="text-upper">Matrix Notation</span>
+                <span class="header-desc"
+                  >all observations at once</span
+                >
+              </th>
+            </tr>
+            <tr class="sub-header">
+              <th class="sub-lin-v">
+                <span class="text-upper">Linear Regression</span>
+              </th>
+              <th class="sub-log-v">
+                <span class="text-upper">Logistic Regression</span>
+              </th>
+              <th class="sub-lin-m">
+                <span class="text-upper">Linear Regression</span>
+              </th>
+              <th class="sub-log-m">
+                <span class="text-upper">Logistic Regression</span>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Features</span>
+              </td>
+              <td class="td-lin-v" colspan="2">
+                <div class="eq">
+                  \(\vec{x}^{(i)} = \begin{bmatrix} x_1^{(i)} & x_2^{(i)} &
+                  \cdots & x_n^{(i)} \end{bmatrix}_{1 \times n}\)
+                </div>
+              </td>
+              <td class="td-lin-m" colspan="2">
+                <div class="eq">
+                  \([X]_{n \times m} = \left[\begin{array}{cccc} | & | & & | \\
+                  \vec{x}^{(1)} & \vec{x}^{(2)} & \cdots & \vec{x}^{(m)} \\ | &
+                  | & & | \end{array}\right]\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Weights</span>
+              </td>
+              <td class="td-lin-v" colspan="2">
+                <div class="eq">
+                  \(\vec{w} = \begin{bmatrix} w_1 & w_2 & \cdots & w_n
+                  \end{bmatrix}_{1 \times n}\)
+                </div>
+              </td>
+              <td class="td-lin-m" colspan="2">
+                <div class="eq">
+                  \([W]_{n \times 1} = \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\
+                  w_n \end{bmatrix}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Bias</span>
+              </td>
+              <td class="td-lin-v" colspan="2">
+                <div class="eq">\(b\)</div>
+              </td>
+              <td class="td-lin-m" colspan="2">
+                <div class="eq">
+                  \([B]_{1 \times m} = \bigl[\,b\;\; b\;\; \cdots\;\;
+                  b\,\bigr]\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Output Labels</span>
+              </td>
+              <td class="td-lin-v" colspan="2">
+                <div class="eq">\(y^{(i)}\)</div>
+              </td>
+              <td class="td-lin-m" colspan="2">
+                <div class="eq">
+                  \([Y]_{1 \times m} = \bigl[\,y^{(1)}\;\; y^{(2)}\;\;
+                  \cdots\;\; y^{(m)}\,\bigr]\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label" rowspan="2">
+                <span class="text-upper">Model /<br />Prediction</span>
+              </td>
+              <td class="td-vec-shared" colspan="2">
+                <div class="eq">
+                  \(\hat{y}^{(i)} = f_{\vec{w},b}\!\left(\vec{x}^{(i)}\right)\)
+                </div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">\([\hat{Y}]_{1 \times m} = f_{W,B}(X)\)</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-lin-v">
+                <div class="eq">\(\vec{w}\cdot\vec{x}^{(i)} + b\)</div>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(\sigma\!\left(\vec{w}\cdot\vec{x}^{(i)} + b\right)\)
+                </div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">\(W^{\top}X + B\)</div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">\(\sigma\!\left(W^{\top}X + B\right)\)</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label" rowspan="2">
+                <span class="text-upper">Loss</span>
+              </td>
+              <td class="td-vec-shared" colspan="2">
+                <div class="eq">\(L\!\left(\hat{y}^{(i)}, y^{(i)}\right)\)</div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">\(L\!\left(\hat{Y}, Y\right)\)</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-lin-v">
+                <div class="eq">
+                  \(\dfrac{1}{2}\!\left(\hat{y}^{(i)} - y^{(i)}\right)^{\!2}\)
+                </div>
+                <div class="note">MSE (Mean Squared Error)</div>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(-\!\left[y^{(i)}\log\hat{y}^{(i)} +
+                  \left(1\!-\!y^{(i)}\right)\log\!\left(1\!-\!\hat{y}^{(i)}\right)\right]\)
+                </div>
+                <div class="note">Binary Cross-Entropy / Log Loss</div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">
+                  \(\dfrac{1}{2}\left(\hat{Y} - Y\right)^{\odot 2}\)
+                </div>
+                <div class="note">MSE (Mean Squared Error)</div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(-\!\left[Y \odot \log\hat{Y} + (\mathbf{1}\!-\!Y) \odot
+                  \log(\mathbf{1}\!-\!\hat{Y})\right]\)
+                </div>
+                <div class="note">
+                  Binary Cross-Entropy / Log Loss<br />(log is applied
+                  element-wise)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Cost</span>
+              </td>
+              <td class="td-vec-shared" colspan="2">
+                <div class="eq">
+                  \(J(\vec{w}, b) = \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}
+                  L\!\left(\hat{y}^{(i)}, y^{(i)}\right)\)
+                </div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">
+                  \(J(W, B) = \dfrac{1}{m}\cdot\mathbf{1}\cdot L(\hat{Y},
+                  Y)^{\top}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Cost Gradient</span>
+              </td>
+              <td class="td-vec-shared" colspan="2">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial w_j} =
+                  \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}\!\left(\hat{y}^{(i)}-y^{(i)}\right)
+                  x_j^{(i)}\)
+                </div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial W} =
+                  \dfrac{1}{m}\,X\!\left(\hat{Y} - Y\right)^{\!\top}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper"
+                  >Gradient Descent<br />Update (weights)</span
+                >
+              </td>
+              <td class="td-vec-shared" colspan="2">
+                <div class="eq">
+                  \(w_j := w_j - \alpha\,\dfrac{\partial J}{\partial w_j}\)
+                </div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">
+                  \(W := W - \alpha\,\dfrac{\partial J}{\partial W}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Cost Gradient<br />(bias term)</span>
+              </td>
+              <td class="td-vec-shared" colspan="2">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial b} =
+                  \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}\!\left(\hat{y}^{(i)}-y^{(i)}\right)\)
+                </div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial B} =
+                  \dfrac{1}{m}\cdot\mathbf{1}\cdot\left(\hat{Y}-Y\right)^{\!\top}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper"
+                  >Gradient Descent<br />Update (bias)</span
+                >
+              </td>
+              <td class="td-vec-shared" colspan="2">
+                <div class="eq">
+                  \(b := b - \alpha\,\dfrac{\partial J}{\partial b}\)
+                </div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">
+                  \(B := B - \alpha\,\dfrac{\partial J}{\partial B}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Regularization Term</span>
+              </td>
+              <td class="td-vec-shared" colspan="2">
+                <div class="eq">
+                  \(\dfrac{\lambda}{2m}\displaystyle\sum_{j=1}^{n} w_j^2\)
+                </div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">\(\dfrac{\lambda}{2m}\,W^{\top}W\)</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Regularization Gradient</span>
+              </td>
+              <td class="td-vec-shared" colspan="2">
+                <div class="eq">
+                  \(\dfrac{\partial}{\partial w_j} \left( \dfrac{\lambda}{2m}
+                  \sum_{j=1}^{n} w_j^2 \right) = \dfrac{\lambda}{m} w_j\)
+                </div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">
+                  \(\dfrac{\partial}{\partial W} \left( \dfrac{\lambda}{2m}
+                  W^{\top}W \right) = \dfrac{\lambda}{m} W\)
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "\\(", right: "\\)", display: false },
+          { left: "\\[", right: "\\]", display: true },
+        ],
+        throwOnError: false,
+      });
+    </script>
+  </body>
+</html>

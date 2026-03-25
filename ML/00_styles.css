@@ -1,0 +1,138 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f5f0e8;
+  font-family: "IBM Plex Mono", monospace;
+  color: #1a1a1a;
+  min-height: 100vh;
+  padding: 48px 32px;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 0.68rem;
+  color: #888;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 36px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1.5px solid #1a1a1a;
+}
+
+td,
+th {
+  border: 1px solid #1a1a1a;
+  padding: 10px 14px;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  vertical-align: middle;
+}
+
+.ml-header {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  background: #1a1a1a;
+  color: #f5f0e8;
+  padding: 10px 14px;
+}
+
+.axis-cell {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  width: 52px;
+}
+
+.axis-lp {
+  background: #d4ede0;
+  color: #1f5c3a;
+  border-left: 1.5px solid #2d6645;
+}
+.axis-inf {
+  background: #d6dff0;
+  color: #1f3060;
+  border-left: 1.5px solid #3b5998;
+}
+.axis-pro {
+  background: #f0d8d8;
+  color: #5c1f1f;
+  border-left: 1.5px solid #8b3a3a;
+}
+
+.type-cell {
+  font-weight: 500;
+  text-align: center;
+  font-size: 0.78rem;
+}
+
+.sub-cell {
+  text-align: center;
+  font-size: 0.72rem;
+  color: #333;
+}
+
+.desc-cell {
+  font-family: inherit; /* Keeps the IBM Plex Mono font */
+  font-size: 0.7rem; /* Slightly smaller for hierarchy */
+  color: #3b4252; /* A cooler, distinct slate-grey */
+  line-height: 1.6;
+  letter-spacing: 0.02em; /* Slightly wider spacing */
+  opacity: 0.9; /* Softens the text appearance naturally */
+}
+
+.lp-row td:not(.axis-cell) {
+  background: #f2f8f5;
+}
+.lp-sub td:not(.axis-cell) {
+  background: #e8f3ed;
+}
+.lp-desc td:not(.axis-cell) {
+  background: #f2f8f5;
+}
+
+.inf-row td {
+  background: #f0f3fa;
+  border-top: 2.5px solid #1a1a1a;
+}
+.inf-row td.axis-cell {
+  background: #d6dff0;
+}
+
+.inf-desc td:not(.axis-cell) {
+  background: #e8eef7;
+}
+
+.pro-row td {
+  background: #faf0f0;
+  border-top: 2.5px solid #1a1a1a;
+}
+.pro-row td.axis-cell {
+  background: #f0d8d8;
+}
+
+.pro-desc td:not(.axis-cell) {
+  background: #f5e8e8;
+}

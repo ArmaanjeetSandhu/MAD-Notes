@@ -41,6 +41,10 @@
   scrollbar-width: none;
 }
 
+.main-table thead th:not(:last-child) {
+  border-right: 2px solid var(--rule);
+}
+
 body {
   font-family: "Lora", Georgia, serif;
   background: var(--page);
@@ -66,7 +70,6 @@ body {
 .table-wrap {
   overflow-x: auto;
   border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   margin-bottom: 48px;
 }
 
@@ -140,9 +143,9 @@ thead tr.top-header th {
 }
 
 thead tr.top-header th.th-empty {
-  background: var(--page) !important;
-  border-top: 2px solid var(--page) !important;
-  border-left: 2px solid var(--page) !important;
+  background: transparent !important;
+  border-top: hidden !important;
+  border-left: hidden !important;
   border-right: 1px solid var(--rule);
   border-bottom: 1.5px solid var(--rule);
 }
@@ -257,9 +260,11 @@ td.td-mat-shared {
 
 .eq {
   font-size: 14px;
-  overflow-x: auto;
-  line-height: 2;
+  line-height: 2.5;
   text-align: center;
+  padding: 12px 0;
+  overflow: visible;
+  white-space: normal;
 }
 .note {
   font-size: 11.5px;
@@ -325,14 +330,14 @@ td.td-mat-shared {
   font-size: 14px;
   color: var(--ink-2);
   line-height: 1.8;
-  margin-bottom: 14px;
 }
 
 .neq-eq {
   text-align: center;
   font-size: 14px;
-  line-height: 2.2;
-  overflow-x: auto;
+  line-height: 2.5;
+  padding: 12px 0;
+  overflow: visible;
 }
 
 .neq-eq-bullet {
@@ -346,24 +351,23 @@ td.td-mat-shared {
 }
 
 .neq-list {
-  list-style: none;
+  list-style: disc;
+  padding-left: 20px;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .neq-list li {
   font-size: 14px;
   color: var(--ink-2);
   line-height: 1.8;
-  padding-left: 22px;
+  padding-left: 0;
   position: relative;
 }
 
 .neq-list li::before {
-  content: "–";
   position: absolute;
   left: 0;
   color: var(--accent-teal);

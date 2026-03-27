@@ -351,8 +351,7 @@ td.td-mat-shared {
 }
 
 .neq-list {
-  list-style: disc;
-  padding-left: 20px;
+  list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
@@ -363,7 +362,7 @@ td.td-mat-shared {
   font-size: 14px;
   color: var(--ink-2);
   line-height: 1.8;
-  padding-left: 0;
+  padding-left: 20px;
   position: relative;
 }
 
@@ -372,6 +371,19 @@ td.td-mat-shared {
   left: 0;
   color: var(--accent-teal);
   font-weight: 600;
+}
+
+ul.neq-list li::before {
+  content: "•";
+}
+
+ol.neq-list {
+  counter-reset: neq-counter;
+}
+
+ol.neq-list li::before {
+  counter-increment: neq-counter;
+  content: counter(neq-counter) ".";
 }
 
 .note-grid {

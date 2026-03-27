@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>K-Means Clustering</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <h2 class="section-title">Lloyd's Algorithm</h2>
+
+      <div class="neq-card">
+        <div class="neq-block">
+          <div class="neq-label text-upper">Concept</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              The process begins by randomly initialising \(K\) cluster
+              centroids. The algorithm then alternates between two main steps:
+            </p>
+            <ol class="neq-list">
+              <li>
+                <strong>Cluster Assignment</strong>: Each observation is
+                assigned to the cluster whose centroid is closest, based on the
+                smallest L2 norm (i.e., the least Euclidean distance). In other
+                words, each observation is grouped with the centroid to which it
+                is nearest.
+              </li>
+              <li>
+                <strong>Centroid Update</strong>: The centroid of each cluster
+                is updated by computing the mean of all observations within that
+                cluster and repositioning the centroid to this mean.
+              </li>
+            </ol>
+            <p class="neq-prose" style="margin-top: 8px">
+              These two steps are repeated iteratively until convergence, which
+              occurs when:
+            </p>
+            <ul class="neq-list">
+              <li>the cluster assignments no longer change</li>
+              <li>
+                the centroids remain the same as in the previous iteration
+              </li>
+            </ul>
+            <div class="neq-prose">
+              These two conditions are logically equivalent (if one holds, the
+              other must hold too).
+            </div>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Variables &<br />Notation</div>
+          <div class="neq-body">
+            <table
+              style="
+                margin: 0 20% 0 auto;
+                width: auto;
+                border: none;
+                min-width: auto;
+              "
+            >
+              <tbody>
+                <tr style="border: none">
+                  <td
+                    style="
+                      padding: 4px 16px 4px 0;
+                      border: none;
+                      text-align: left;
+                      white-space: nowrap;
+                    "
+                    class="eq"
+                  >
+                    \(K\)
+                  </td>
+                  <td
+                    style="padding: 4px 0; border: none; text-align: left"
+                    class="neq-prose"
+                  >
+                    Number of clusters
+                  </td>
+                </tr>
+                <tr style="border: none">
+                  <td
+                    style="
+                      padding: 4px 16px 4px 0;
+                      border: none;
+                      text-align: left;
+                      white-space: nowrap;
+                    "
+                    class="eq"
+                  >
+                    \(m\)
+                  </td>
+                  <td
+                    style="padding: 4px 0; border: none; text-align: left"
+                    class="neq-prose"
+                  >
+                    Number of observations in the dataset
+                  </td>
+                </tr>
+                <tr style="border: none">
+                  <td
+                    style="
+                      padding: 4px 16px 4px 0;
+                      border: none;
+                      text-align: left;
+                      white-space: nowrap;
+                    "
+                    class="eq"
+                  >
+                    \(c^{(i)}\)
+                  </td>
+                  <td
+                    style="padding: 4px 0; border: none; text-align: left"
+                    class="neq-prose"
+                  >
+                    Index of the cluster \((1, \dots, K)\) to which observation
+                    \(\vec{x}^{(i)}\) is currently assigned
+                  </td>
+                </tr>
+                <tr style="border: none">
+                  <td
+                    style="
+                      padding: 4px 16px 4px 0;
+                      border: none;
+                      text-align: left;
+                      white-space: nowrap;
+                    "
+                    class="eq"
+                  >
+                    \(\vec{\mu}_k\)
+                  </td>
+                  <td
+                    style="padding: 4px 0; border: none; text-align: left"
+                    class="neq-prose"
+                  >
+                    The vector location of cluster centroid \(k\)
+                  </td>
+                </tr>
+                <tr style="border: none">
+                  <td
+                    style="
+                      padding: 4px 16px 4px 0;
+                      border: none;
+                      text-align: left;
+                      white-space: nowrap;
+                    "
+                    class="eq"
+                  >
+                    \(\vec{\mu}_{c^{(i)}}\)
+                  </td>
+                  <td
+                    style="padding: 4px 0; border: none; text-align: left"
+                    class="neq-prose"
+                  >
+                    The centroid of the cluster to which observation
+                    \(\vec{x}^{(i)}\) has been assigned
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Cost Function</div>
+          <div class="neq-body">
+            <div class="eq neq-eq">
+              \(J(c^{(1)}, \dots, c^{(m)}, \vec{\mu}_1, \dots, \vec{\mu}_K) =
+              \dfrac{1}{m}\displaystyle\sum_{i=1}^{m} \left\| \vec{x}^{(i)} -
+              \vec{\mu}_{c^{(i)}} \right\|^2\)
+            </div>
+            <div class="note" style="margin-top: 0px">
+              Distortion / Inertia / Within-Cluster Sum of Squares (WCSS)
+            </div>
+            <p class="neq-prose" style="margin-top: 18px">
+              Because it minimises the sum of squared Euclidean distances
+              between data points and their centroids, \(k\)-means clustering
+              implicitly assumes clusters are spherical and of similar size. It
+              can therefore struggle to accurately capture clusters that are
+              elongated or of varying sizes.
+            </p>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Cluster Assignment</div>
+          <div class="neq-body eq">
+            for \(i = 1 \text{ to } m : \quad c^{(i)} := \arg\min_{k} \left\|
+            \vec{x}^{(i)} - \vec{\mu}_k \right\|^2\)
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Centroid Update</div>
+          <div class="neq-body">
+            <div class="eq neq-eq">
+              for \(k = 1 \text{ to } K: \quad \vec{\mu}_k := \dfrac{1}{|C_k|}
+              \displaystyle\sum_{i \in C_k} \vec{x}^{(i)}\)
+            </div>
+            <div class="note" style="margin-top: 0px">
+              where \(C_k\) is the set of all observations assigned to cluster
+              \(k\), and \(|C_k|\) is the number of observations in that set.
+            </div>
+            <p class="neq-prose" style="margin-top: 18px">
+              If a cluster \(k\) has no observations assigned to it (i.e.,
+              \(C_k\) is empty), \(|C_k|\) becomes zero, leading to a division
+              by zero in the centroid update formula. To handle this edge case,
+              there are two approaches:
+            </p>
+            <ol class="neq-list">
+              <li>
+                Reinitialise the centroid \(\vec{\mu}_k\) to a random position
+                within the data space, with the hope that it will attract some
+                observations in the next iteration.
+              </li>
+              <li>
+                Remove the empty cluster from consideration in subsequent
+                iterations, thereby reducing the number of clusters \(K\) by
+                one.
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Choosing K</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              The number of clusters \(K\) is a hyperparameter that must be
+              chosen before running the algorithm. A common heuristic for
+              selecting \(K\) is the <strong>Elbow Method</strong>:
+            </p>
+            <ol class="neq-list">
+              <li>
+                Run the \(k\)-means algorithm for a range of values of \(K\)
+                (e.g., \(K = 1\) to \(10\)).
+              </li>
+              <li>For each value of \(K\), compute the cost function \(J\).</li>
+              <li>
+                Plot the cost function \(J\) on the y-axis against the number of
+                clusters \(K\) on the x-axis.
+              </li>
+            </ol>
+            <p class="neq-prose" style="margin-top: 8px">
+              As \(K\) increases, the cost function will naturally decrease
+              because the data points are closer to their respective centroids.
+              The goal is to identify the "elbow" or "knee" of the curve, which
+              is the point where the rate of decrease sharply shifts from steep
+              to shallow. This point represents a good trade-off between
+              minimising the cost and preventing overfitting.
+            </p>
+            <p class="neq-prose" style="margin-top: 8px">
+              However, the "elbow" is not always clearly defined. If the plot is
+              relatively smooth without a distinct kink, other evaluation
+              metrics like the Silhouette Score may be required to choose \(K\).
+            </p>
+            <p class="neq-prose" style="margin-top: 8px">
+              Note that \(J\) will always decrease as \(K\) increases, and so it
+              does not make sense to pick the value of \(K\) for which \(J\) has
+              the lowest value (i.e., \(K = m\)).
+            </p>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Centroid Initialisation</div>
+          <div class="neq-body">
+            <div class="note-grid">
+              <div class="note-item note-pro">
+                <span class="note-tag"
+                  >Random initialisation (feature space)</span
+                >
+                Initialise each centroid \(\vec{\mu}_k\) to a random point
+                within the range of the dataset's feature values.
+              </div>
+              <div class="note-item note-con">
+                <span class="note-tag"
+                  >Random initialisation (data samples)</span
+                >
+                Initialise each centroid \(\vec{\mu}_k\) by randomly selecting
+                \(K\) observations from the dataset.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Convergence</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              With Lloyd's algorithm, convergence is guaranteed. However, since
+              WCSS is a non-convex function, it is possible to get stuck in a
+              local minimum. Also, convergence is sensitive to centroid
+              intialisation.
+              <br />
+              To mitigate this, it's a good idea to run \(k\)-means multiple
+              times with different random initialisations, and then select the
+              clustering with the lowest cost function value.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "\\(", right: "\\)", display: false },
+          { left: "\\[", right: "\\]", display: true },
+        ],
+        throwOnError: false,
+      });
+    </script>
+  </body>
+</html>

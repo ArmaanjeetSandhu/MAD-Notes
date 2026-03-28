@@ -282,7 +282,7 @@
 
             <tr>
               <td class="td-label">
-                <span class="text-upper">Cost Gradient <br />(weights)</span>
+                <span class="text-upper">Cost Gradient<br />(weights)</span>
               </td>
               <td class="td-vec-shared" colspan="2">
                 <div class="eq">
@@ -861,7 +861,7 @@
             <li>
               Replace \(\left(\tilde{X}\tilde{X}^{\top}\right)^{-1}\tilde{X}\)
               with the Moore–Penrose pseudoinverse → \(\tilde{W} =
-              \tilde{X}^{+}\,Y_{\text{true}}^{\top}\)
+              (\tilde{X}^{\top})^{+}\,Y_{\text{true}}^{\top}\)
             </li>
             <li>
               Implement regularisation (ridge regression) by adding \(\lambda
@@ -896,14 +896,6 @@
       </div>
     </div>
 
-    <script>
-      renderMathInElement(document.body, {
-        delimiters: [
-          { left: "\\(", right: "\\)", display: false },
-          { left: "\\[", right: "\\]", display: true },
-        ],
-        throwOnError: false,
-      });
-    </script>
+    <script src="render-math.js"></script>
   </body>
 </html>

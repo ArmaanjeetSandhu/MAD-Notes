@@ -8,17 +8,20 @@
   --col-label-bg: #e8f3e8;
   --col-label-border: #c2dcc2;
 
-  --col-lin-s-bg: #fce8e3;
+  --bg-pink: #fce8e3;
+  --bg-yellow: #fdf6d8;
+
+  --col-lin-s-bg: var(--bg-pink);
   --col-lin-s-border: #e8c8c0;
-  --col-log-s-bg: #fce8e3;
+  --col-log-s-bg: var(--bg-pink);
 
-  --col-lin-v-bg: #fce8e3;
+  --col-lin-v-bg: var(--bg-pink);
   --col-lin-v-border: #e8c8c0;
-  --col-log-v-bg: #fce8e3;
+  --col-log-v-bg: var(--bg-pink);
 
-  --col-lin-m-bg: #fdf6d8;
+  --col-lin-m-bg: var(--bg-yellow);
   --col-lin-m-border: #e8dca8;
-  --col-log-m-bg: #fdf6d8;
+  --col-log-m-bg: var(--bg-yellow);
 
   --header-border: #c8c4f0;
   --accent-purple: #5b4fcf;
@@ -36,13 +39,10 @@
   width: 0;
   height: 0;
 }
+
 * {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-.main-table thead th:not(:last-child) {
-  border-right: 2px solid var(--rule);
 }
 
 body {
@@ -88,50 +88,36 @@ table {
 .main-table col.c-label {
   width: 10%;
 }
-.main-table col.c-lin-s {
-  width: 15%;
-}
-.main-table col.c-log-s {
-  width: 15%;
-}
-.main-table col.c-lin-v {
-  width: 15%;
-}
-.main-table col.c-log-v {
-  width: 15%;
-}
-.main-table col.c-lin-m {
-  width: 15%;
-}
+
+.main-table col.c-lin-s,
+.main-table col.c-log-s,
+.main-table col.c-lin-v,
+.main-table col.c-log-v,
+.main-table col.c-lin-m,
 .main-table col.c-log-m {
   width: 15%;
+}
+
+.main-table thead th:not(:last-child) {
+  border-right: 2px solid var(--rule);
 }
 
 .dataset-table {
   min-width: 600px;
 }
+
 .dataset-table td,
 .dataset-table th {
   text-align: center;
   border-right: 1px solid var(--rule);
 }
+
 .dataset-table td:last-child,
 .dataset-table th:last-child {
   border-right: none;
 }
-.dataset-table th {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  padding: 14px 18px;
-  background: #e8e2f8;
-  border-bottom: 1.5px solid var(--header-border);
-  color: var(--accent-purple);
-}
-.dataset-table .td-label {
-  font-size: 14px;
-  color: var(--ink-2);
-}
 
+.dataset-table th,
 thead tr.top-header th {
   font-family: "JetBrains Mono", monospace;
   font-size: 11px;
@@ -140,6 +126,11 @@ thead tr.top-header th {
   border-bottom: 1.5px solid var(--header-border);
   color: var(--accent-purple);
   text-align: center;
+}
+
+.dataset-table .td-label {
+  font-size: 14px;
+  color: var(--ink-2);
 }
 
 thead tr.top-header th.th-empty {
@@ -174,33 +165,11 @@ thead tr.sub-header th {
   text-align: center;
   border-bottom: 1.5px solid var(--rule);
 }
-th.sub-lin-s {
-  background: var(--col-lin-s-bg);
-  border-right: 1px solid var(--col-lin-s-border);
-}
-th.sub-log-s {
-  background: var(--col-log-s-bg);
-  border-right: 2px solid var(--rule);
-}
-th.sub-lin-v {
-  background: var(--col-lin-v-bg);
-  border-right: 1px solid var(--col-lin-v-border);
-}
-th.sub-log-v {
-  background: var(--col-log-v-bg);
-  border-right: 2px solid var(--rule);
-}
-th.sub-lin-m {
-  background: var(--col-lin-m-bg);
-  border-right: 1px solid var(--col-lin-m-border);
-}
-th.sub-log-m {
-  background: var(--col-log-m-bg);
-}
 
 tbody tr {
   border-bottom: 1px solid var(--rule);
 }
+
 tbody tr:last-child {
   border-bottom: none;
 }
@@ -222,38 +191,47 @@ td.td-label {
   line-height: 1.7;
 }
 
+th.sub-lin-s,
 td.td-lin-s {
   background: var(--col-lin-s-bg);
   border-right: 1px solid var(--col-lin-s-border);
 }
+
+th.sub-log-s,
 td.td-log-s {
   background: var(--col-log-s-bg);
   border-right: 2px solid var(--rule);
 }
+
+th.sub-lin-v,
 td.td-lin-v {
   background: var(--col-lin-v-bg);
   border-right: 1px solid var(--col-lin-v-border);
 }
+
+th.sub-log-v,
 td.td-log-v {
   background: var(--col-log-v-bg);
   border-right: 2px solid var(--rule);
 }
+
+th.sub-lin-m,
 td.td-lin-m {
   background: var(--col-lin-m-bg);
   border-right: 1px solid var(--col-lin-m-border);
 }
+
+th.sub-log-m,
 td.td-log-m {
   background: var(--col-log-m-bg);
 }
 
-td.td-sca-shared {
+td.td-sca-shared,
+td.td-vec-shared {
   background: var(--col-lin-s-bg);
   border-right: 2px solid var(--rule);
 }
-td.td-vec-shared {
-  background: var(--col-lin-v-bg);
-  border-right: 2px solid var(--rule);
-}
+
 td.td-mat-shared {
   background: var(--col-lin-m-bg);
 }
@@ -266,6 +244,7 @@ td.td-mat-shared {
   overflow: visible;
   white-space: normal;
 }
+
 .note {
   font-size: 11.5px;
   color: var(--ink-3);
@@ -278,6 +257,7 @@ td.td-mat-shared {
 .katex {
   font-size: 1em !important;
 }
+
 .katex-display {
   margin: 0 !important;
 }

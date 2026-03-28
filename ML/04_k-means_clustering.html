@@ -319,25 +319,24 @@
               With Lloyd's algorithm, convergence is guaranteed. However, since
               WCSS is a non-convex function, it is possible to get stuck in a
               local minimum. Also, convergence is sensitive to centroid
-              intialisation.
-              <br />
-              To mitigate this, it's a good idea to run \(k\)-means multiple
-              times with different random initialisations, and then select the
-              clustering with the lowest cost function value.
+              intialisation. To mitigate this, it's a good idea to run
+              \(k\)-means multiple times with different random initialisations,
+              and then select the clustering with the lowest cost function
+              value.
+            </p>
+            <p class="neq-prose" style="margin-top: 8px">
+              Despite the guarantee of convergence, the number of iterations
+              that it takes to converge can vary widely. In cases where
+              convergence is slow, automatic convergence testing can be
+              implemented. This involves defining a threshold \(\epsilon\) such
+              that if \(J\) decreases by less than \(\epsilon\) between
+              iterations, convergence is declared.
             </p>
           </div>
         </div>
       </div>
     </div>
 
-    <script>
-      renderMathInElement(document.body, {
-        delimiters: [
-          { left: "\\(", right: "\\)", display: false },
-          { left: "\\[", right: "\\]", display: true },
-        ],
-        throwOnError: false,
-      });
-    </script>
+    <script src="render-math.js"></script>
   </body>
 </html>

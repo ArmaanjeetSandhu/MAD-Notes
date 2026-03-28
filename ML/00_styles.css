@@ -95,12 +95,12 @@ th {
 }
 
 .desc-cell {
-  font-family: inherit; /* Keeps the IBM Plex Mono font */
-  font-size: 0.7rem; /* Slightly smaller for hierarchy */
-  color: #3b4252; /* A cooler, distinct slate-grey */
+  font-family: inherit;
+  font-size: 0.7rem;
+  color: #3b4252;
   line-height: 1.6;
-  letter-spacing: 0.02em; /* Slightly wider spacing */
-  opacity: 0.9; /* Softens the text appearance naturally */
+  letter-spacing: 0.02em;
+  opacity: 0.9;
 }
 
 .lp-row td:not(.axis-cell) {

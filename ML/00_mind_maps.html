@@ -19,8 +19,18 @@
 
       <tr class="lp-row">
         <td class="axis-cell axis-lp" rowspan="3">Learning Paradigm</td>
-        <td class="type-cell" colspan="2">Supervised</td>
-        <td class="type-cell" colspan="4">Unsupervised</td>
+        <td class="type-cell" colspan="2">
+          Supervised<br />
+          <span class="desc-cell" style="font-weight: normal"
+            >Learns from labelled training data</span
+          >
+        </td>
+        <td class="type-cell" colspan="4">
+          Unsupervised<br />
+          <span class="desc-cell" style="font-weight: normal"
+            >Discovers patterns in unlabelled data</span
+          >
+        </td>
         <td class="type-cell" colspan="1" rowspan="2">
           Reinforcement Learning
         </td>
@@ -90,6 +100,55 @@
         <td class="desc-cell" colspan="2">
           Updates model continuously as each new data point arrives; no need to
           store historical data, e.g., online gradient descent
+        </td>
+      </tr>
+    </table>
+
+    <br />
+
+    <table>
+      <tr>
+        <td colspan="4" class="ml-header">DATA TYPES</td>
+      </tr>
+
+      <tr class="lp-row">
+        <td class="type-cell" colspan="2">
+          Categorical<br />
+          <span class="desc-cell" style="font-weight: normal"
+            >Represents groups or labels; numbers are just codes</span
+          >
+        </td>
+        <td class="type-cell" colspan="2">
+          Numerical<br />
+          <span class="desc-cell" style="font-weight: normal"
+            >Represents genuine amounts where arithmetic is meaningful</span
+          >
+        </td>
+      </tr>
+
+      <tr class="lp-sub">
+        <td class="sub-cell">Ordinal</td>
+        <td class="sub-cell">Nominal</td>
+        <td class="sub-cell">Discrete</td>
+        <td class="sub-cell">Continuous</td>
+      </tr>
+
+      <tr class="lp-desc">
+        <td class="desc-cell">
+          Categories where order matters, but the exact gap between them is
+          unknown, e.g., satisfaction ratings
+        </td>
+        <td class="desc-cell">
+          Categories with no inherent order or ranking; purely labels, e.g., eye
+          color or blood type
+        </td>
+        <td class="desc-cell">
+          Specific, countable numerical values, usually integers with clear
+          steps, e.g., number of children
+        </td>
+        <td class="desc-cell">
+          Can take any value within a range, including all decimals and
+          fractions, e.g., height or temperature
         </td>
       </tr>
     </table>

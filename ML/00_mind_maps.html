@@ -151,6 +151,86 @@
           fractions, e.g., height or temperature
         </td>
       </tr>
+
+      <tr>
+        <td
+          colspan="4"
+          style="
+            padding: 20px 0;
+            border-top: 2.5px solid #1a1a1a;
+            background: #f5f0e8;
+          "
+        >
+          <div class="tree">
+            <ul>
+              <li>
+                <div class="flow-box flow-diamond">
+                  Does the data have a natural, inherent ranking or order?
+                </div>
+                <ul>
+                  <li>
+                    <div class="flow-label">YES</div>
+                    <div class="flow-box flow-diamond">
+                      Are the gaps between adjacent values equal and objectively
+                      measurable? Does doubling a value make real-world sense?
+                    </div>
+                    <ul>
+                      <li>
+                        <div class="flow-label">YES</div>
+                        <div class="flow-box flow-pill">Discrete</div>
+                        <ul>
+                          <li>
+                            <div class="flow-box flow-action">
+                              Use as-is, or normalise
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <div class="flow-label">NO</div>
+                        <div class="flow-box flow-pill">Ordinal</div>
+                        <ul>
+                          <li>
+                            <div class="flow-box flow-diamond">
+                              What is the cardinality?
+                            </div>
+                            <ul>
+                              <li>
+                                <div class="flow-label">HIGH</div>
+                                <div class="flow-box flow-action">
+                                  Use as-is, or normalise
+                                </div>
+                              </li>
+                              <li>
+                                <div class="flow-label">LOW</div>
+                                <div class="flow-box flow-action">
+                                  Perform label encoding;<br />use median, not
+                                  mean
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="flow-label">NO</div>
+                    <div class="flow-box flow-pill">Nominal</div>
+                    <ul>
+                      <li>
+                        <div class="flow-box flow-action">
+                          Perform one-hot encoding
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
     </table>
   </body>
 </html>

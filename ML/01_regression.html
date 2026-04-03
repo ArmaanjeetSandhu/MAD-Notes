@@ -821,11 +821,17 @@
       <div class="neq-divider"></div>
 
       <div class="neq-block">
-        <div class="neq-label text-upper">Cost/Error Function</div>
+        <div class="neq-label text-upper">Cost / Error Function</div>
         <div class="neq-body">
           <div class="eq neq-eq">
             \(J(\tilde{W}) = \dfrac{1}{m}\left\|\tilde{W}^{\top}\tilde{X} -
             Y_{\text{true}}\right\|_{\!F}^{2}\)
+          </div>
+          <div class="note" style="margin-top: 0px">
+            Minimising this cost is the
+            <strong>OLS (Ordinary Least Squares)</strong> objective, scaled by
+            \(\frac{1}{m}\) for consistency with the gradient descent
+            formulation
           </div>
         </div>
       </div>

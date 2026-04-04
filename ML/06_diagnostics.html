@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bias and Variance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <h2 class="section-title">Bias and Variance</h2>
+
+      <div class="neq-card">
+        <div class="neq-block">
+          <div class="neq-label text-upper">Concept</div>
+          <div class="neq-body">
+            <div class="note-grid">
+              <div class="note-item note-con">
+                <span class="note-tag">High Bias</span>
+                <strong>Underfitting:</strong> The model fails to capture the
+                underlying patterns in the training data, resulting in poor
+                performance even on examples it has already seen.
+              </div>
+              <div class="note-item note-con">
+                <span class="note-tag">High Variance</span>
+                <strong>Overfitting:</strong> The model fits the training data
+                extremely well but fails to generalise, capturing noise and
+                dataset-specific quirks rather than true structure.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Data Splitting</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              To evaluate a model's bias and variance, the dataset is divided
+              into two distinct subsets before any training takes place:
+            </p>
+            <ul class="neq-list">
+              <li>
+                A <strong>training set</strong>, used to fit the model's
+                parameters
+              </li>
+              <li>
+                A <strong>test set</strong>, held back entirely and used only to
+                evaluate generalisation performance on unseen data
+              </li>
+            </ul>
+
+            <div class="note" style="margin-top: 16px; text-align: left">
+              The absolute size of the test set matters more than its proportion
+              of the total data. A test set of 10,000 examples gives roughly the
+              same statistical reliability whether the full dataset contains
+              50,000 or 50 million examples. This is why, for datasets on the
+              order of thousands to hundreds of thousands of examples, a
+              <strong>70/30</strong> or <strong>80/20</strong> split is common.
+              For datasets on the order of millions or more, proportions such as
+              <strong>99/1</strong> or <strong>98/2</strong> are typical.
+            </div>
+
+            <p class="neq-prose" style="margin-top: 18px">
+              After training, performance is measured by the <em>error</em> on
+              each subset. This error is a performance metric that may or may
+              not be the same as the loss function used during training.
+            </p>
+            <ul class="neq-list">
+              <li>
+                For regression, the error may be MSE (the same as the training
+                loss), RMSE (for higher interpretability than MSE), MAE (Mean
+                Absolute Error), or R² (coefficient of determination)
+              </li>
+              <li>
+                For binary classification, if the dataset is balanced, the error
+                may be classification error rate (the proportion of
+                misclassified examples), and if the dataset is imbalanced, it
+                may be precision, recall, F1 score, etc.
+              </li>
+            </ul>
+            <p class="neq-prose" style="margin-top: 10px">
+              Because the model has already been exposed to the training data,
+              it will almost always achieve a lower error there than on fresh,
+              unseen examples. Therefore, the test error \(J_{test}\) provides a
+              more meaningful estimate of the model's true generalisation
+              performance. For example, an overfitted model will exhibit a very
+              low \(J_{training}\) alongside relatively high \(J_{test}\).
+            </p>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Model Selection</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              Bias/variance diagnosis lends itself to a natural strategy for
+              choosing between different candidate models (that differ in
+              regularisation strength, polynomial degree, network architecture,
+              etc.). Simply train each model and pick the one that achieves the
+              lowest \(J_{test}\). The problem is that this figure then becomes
+              an
+              <em>optimistic</em> estimate of true generalisation performance,
+              because by selecting the model that happened to do best on this
+              particular test set, we have implicitly optimised for it,
+              introducing a subtle selection bias.
+            </p>
+            <p class="neq-prose" style="margin-top: 10px">
+              The standard remedy is to introduce a third subset, giving a
+              three-way split of the full dataset:
+            </p>
+            <ul class="neq-list">
+              <li>
+                A <strong>training set</strong>, used to fit the model's
+                parameters
+              </li>
+              <li>
+                A <strong>validation set</strong>, used to compare and select
+                between candidate models
+              </li>
+              <li>
+                A <strong>test set</strong>, used once, at the very end, to
+                report an unbiased estimate of the chosen model's generalisation
+                error
+              </li>
+            </ul>
+
+            <div class="note" style="margin-top: 16px; text-align: left">
+              For datasets on the order of thousands to hundreds of thousands of
+              examples, a <strong>60/20/20</strong> split is common. For
+              datasets on the order of millions or more, proportions such as
+              <strong>98/1/1</strong> or <strong>99/0.5/0.5</strong> are
+              typical, since even a small fraction of a large dataset yields a
+              statistically reliable evaluation set.
+            </div>
+
+            <p class="neq-prose" style="margin-top: 18px">
+              The workflow is then: compute the validation error \(J_{val}\) of
+              each candidate model, select the one with the lowest value, and
+              report its test error \(J_{test}\) as the final, unbiased estimate
+              of generalisation performance.
+            </p>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Evaluating Error</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              But what do "high" and "low" mean? To ground these terms in
+              context, we need a
+              <em>baseline</em> — typically human-level performance on the same
+              task, a competing algorithm's published result, or an established
+              benchmark. From there, two key quantities can be defined:
+            </p>
+            <ul class="neq-list">
+              <li>
+                <strong>Avoidable bias</strong>: \(J_{training} - J_{baseline}\)
+                <br />Measures how much worse the model is than the best
+                achievable performance
+              </li>
+              <li>
+                <strong>Variance</strong>: \(J_{val} - J_{training}\)<br />Measures
+                how much performance degrades when moving from seen to unseen
+                data
+              </li>
+            </ul>
+
+            <p class="neq-prose" style="margin-top: 18px">
+              Comparing these two quantities gives a clear diagnostic picture:
+            </p>
+
+            <ul class="neq-list">
+              <li>
+                If avoidable bias is high, the model is underfitting. The
+                solution is to increase model capacity (e.g., by adding more
+                features, using a more complex architecture, or reducing
+                regularisation).
+              </li>
+              <li>
+                If variance is high, the model is overfitting. The solution is
+                to reduce model capacity (e.g., by removing features, using a
+                simpler architecture, or increasing regularisation).
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Trade-off</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              <strong>Bias</strong> is the error from wrong assumptions.
+              <strong>Variance</strong> is the error from sensitivity to the
+              specific training set.
+            </p>
+            <p class="neq-prose" style="margin-top: 10px">
+              In classical machine learning, there was long believed to be an
+              inherent trade-off between bias and variance. However, this
+              traditional “bias–variance trade-off” perspective has become less
+              dominant with the rise of deep learning. Modern neural networks
+              are typically large and thus exhibit low bias, as they have
+              sufficient capacity to capture complex patterns in training data.
+              Surprisingly, even when these models are heavily overparameterised
+              and achieve near-zero training error, they often still generalise
+              well.
+            </p>
+            <p class="neq-prose" style="margin-top: 10px">
+              This counterintuitive behaviour is known as "double descent". It
+              highlights that the relationship between bias and variance is more
+              intricate than previously assumed, showing that increasing model
+              capacity can, in some cases, improve generalisation, even beyond
+              the point where training error has already been minimised.
+            </p>
+          </div>
+        </div>
+      </div>
+      <h2 class="section-title" style="margin-top: 48px">Error Analysis</h2>
+
+      <div class="neq-card">
+        <div class="neq-block">
+          <div class="neq-label text-upper">Concept</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              Complementing the evaluation of bias and variance, error analysis
+              is an additional diagnostic approach. Rather than summarising
+              performance as a single scalar, it involves manually inspecting
+              misclassified or high-error examples and categorising them by
+              shared characteristics.
+            </p>
+            <p class="neq-prose" style="margin-top: 10px">
+              For example, suppose a spam email classifier misclassifies one
+              fifth of the 5,000 examples in the validation set. Reviewing all
+              (or a subset of) these misclassified examples and grouping them by
+              common traits reveals which error types are most prevalent. The
+              same logic applies to regression: a house price model that
+              produces large residuals for one fifth of its validation examples
+              can be similarly dissected to surface recurring patterns.
+            </p>
+            <p class="neq-prose" style="margin-top: 10px">
+              Such an analysis helps identify where to focus improvement efforts
+              (whether by collecting more targeted data, engineering better
+              features, or correcting labelling mistakes) and it highlights
+              which error types are rare enough to deprioritise.
+            </p>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Label Errors</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              One shared characteristic that may emerge from error analysis is
+              incorrectly labelled examples in the validation set. In this case,
+              the observed validation error is a mixture of errors caused by
+              wrong labels and errors caused by genuine model failures. If the
+              former is significant relative to the latter, correcting these
+              labels becomes worthwhile.
+            </p>
+            <div class="note" style="margin-top: 16px; text-align: left">
+              Since the validation and test sets must always have the same
+              distribution, any label corrections applied to the validation set
+              must also be applied to the test set.
+            </div>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Limitations</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              While diagnosing bias and variance remains the primary step, error
+              analysis provides practical, targeted insights for model
+              refinement. However, it may be less effective in scenarios where
+              even human judgement struggles. For instance, when spam messages
+              are highly sophisticated and difficult to distinguish from
+              legitimate emails, or when house prices are highly volatile and
+              large residuals reflect genuine market noise rather than any
+              correctable flaw in the data or model.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="render-math.js"></script>
+  </body>
+</html>

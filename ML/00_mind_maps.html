@@ -25,7 +25,7 @@
       </tr>
 
       <tr class="lp-row">
-        <td class="axis-cell axis-lp" rowspan="3">Learning Paradigm</td>
+        <td class="axis-cell axis-lp" rowspan="3">Learning<br />Paradigm</td>
         <td class="type-cell" colspan="2">
           Supervised<br />
           <span class="desc-cell" style="font-weight: normal"
@@ -71,7 +71,7 @@
       </tr>
 
       <tr class="inf-row">
-        <td class="axis-cell axis-inf" rowspan="2">Inference Approach</td>
+        <td class="axis-cell axis-inf" rowspan="2">Inference<br />Approach</td>
         <td class="type-cell" colspan="4">Instance-based</td>
         <td class="type-cell" colspan="3">Model-based</td>
       </tr>
@@ -115,17 +115,18 @@
 
     <table>
       <tr>
-        <td colspan="4" class="ml-header">DATA TYPES</td>
+        <td colspan="13" class="ml-header">DATA TYPES</td>
       </tr>
 
       <tr class="lp-row">
-        <td class="type-cell" colspan="2">
+        <td class="axis-cell axis-lp" rowspan="4">Value Type</td>
+        <td class="type-cell" colspan="6">
           Categorical<br />
           <span class="desc-cell" style="font-weight: normal"
             >Represents groups or labels; numbers are just codes</span
           >
         </td>
-        <td class="type-cell" colspan="2">
+        <td class="type-cell" colspan="6">
           Numerical<br />
           <span class="desc-cell" style="font-weight: normal"
             >Represents genuine amounts where arithmetic is meaningful</span
@@ -134,26 +135,26 @@
       </tr>
 
       <tr class="lp-sub">
-        <td class="sub-cell">Ordinal</td>
-        <td class="sub-cell">Nominal</td>
-        <td class="sub-cell">Discrete</td>
-        <td class="sub-cell">Continuous</td>
+        <td class="sub-cell" colspan="3">Ordinal</td>
+        <td class="sub-cell" colspan="3">Nominal</td>
+        <td class="sub-cell" colspan="3">Discrete</td>
+        <td class="sub-cell" colspan="3">Continuous</td>
       </tr>
 
       <tr class="lp-desc">
-        <td class="desc-cell">
+        <td class="desc-cell" colspan="3">
           Categories where order matters, but the exact gap between them is
           unknown, e.g., satisfaction ratings
         </td>
-        <td class="desc-cell">
+        <td class="desc-cell" colspan="3">
           Categories with no inherent order or ranking; purely labels, e.g., eye
           color or blood type
         </td>
-        <td class="desc-cell">
+        <td class="desc-cell" colspan="3">
           Specific, countable numerical values, usually integers with clear
           steps, e.g., number of children
         </td>
-        <td class="desc-cell">
+        <td class="desc-cell" colspan="3">
           Can take any value within a range, including all decimals and
           fractions, e.g., height or temperature
         </td>
@@ -161,10 +162,10 @@
 
       <tr>
         <td
-          colspan="4"
+          colspan="12"
           style="
             padding: 20px 0;
-            border-top: 2.5px solid #1a1a1a;
+            border-top: 1px solid #1a1a1a;
             background: #f5f0e8;
           "
         >
@@ -267,6 +268,28 @@
               </li>
             </ul>
           </div>
+        </td>
+      </tr>
+
+      <tr class="inf-row">
+        <td class="axis-cell axis-inf" rowspan="2">Structure</td>
+        <td class="type-cell" colspan="4">Structured</td>
+        <td class="type-cell" colspan="4">Semi-structured</td>
+        <td class="type-cell" colspan="4">Unstructured</td>
+      </tr>
+
+      <tr class="inf-desc">
+        <td class="desc-cell" colspan="4">
+          Highly organised with a strict, predefined schema, e.g., relational
+          databases (SQL), CSVs
+        </td>
+        <td class="desc-cell" colspan="4">
+          Contains tags or markers to separate elements, but no rigid tabular
+          structure, e.g., JSON, XML, HTML
+        </td>
+        <td class="desc-cell" colspan="4">
+          No predefined data model or structure, making it harder to process and
+          search, e.g., text, images, audio, video
         </td>
       </tr>
     </table>

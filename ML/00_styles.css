@@ -65,6 +65,8 @@ th {
   text-align: center;
   white-space: nowrap;
   width: 52px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }
 
 .axis-lp {
@@ -116,7 +118,7 @@ th {
 
 .inf-row td {
   background: #f0f3fa;
-  border-top: 2.5px solid #1a1a1a;
+  border-top: 1.5px solid #1a1a1a;
 }
 .inf-row td.axis-cell {
   background: #d6dff0;
@@ -128,7 +130,7 @@ th {
 
 .pro-row td {
   background: #faf0f0;
-  border-top: 2.5px solid #1a1a1a;
+  border-top: 1.5px solid #1a1a1a;
 }
 .pro-row td.axis-cell {
   background: #f0d8d8;

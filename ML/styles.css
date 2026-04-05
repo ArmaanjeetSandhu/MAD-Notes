@@ -353,7 +353,7 @@ td.td-mat-shared {
   font-weight: 600;
 }
 
-ul.neq-list li::before {
+ul.neq-list > li::before {
   content: "•";
 }
 
@@ -361,7 +361,7 @@ ol.neq-list {
   counter-reset: neq-counter;
 }
 
-ol.neq-list li::before {
+ol.neq-list > li::before {
   counter-increment: neq-counter;
   content: counter(neq-counter) ".";
 }

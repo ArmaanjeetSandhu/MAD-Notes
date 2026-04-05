@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regression</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <h2 class="section-title">Data Augmentation</h2>
+      <div class="neq-card">
+        <div class="neq-block">
+          <div class="neq-label text-upper">Concept</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              Data augmentation is a technique used to increase the size and
+              diversity of a dataset without actually collecting additional
+              real-world samples. It involves generating new data points by
+              applying transformations to existing samples that mimic realistic
+              variations, while preserving their original labels.
+            </p>
+            <ul class="neq-list">
+              <li>
+                For structured data, this could mean feature scaling, or
+                creating new features through combinations
+              </li>
+              <li>
+                For images: rotation, flipping, cropping, zooming, noise
+                addition, etc.
+              </li>
+              <li>For text data: synonym replacement, paraphrasing, etc.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Transfer Learning</h2>
+      <div class="neq-card">
+        <div class="neq-block">
+          <div class="neq-label text-upper">Concept</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              Transfer learning is a powerful technique that allows the
+              re-purposing of a model trained on one task for a related but
+              different task. It's especially useful when there is insufficient
+              labelled training data for the target task, or when an existing
+              model trained on a related task already captures rich, reusable
+              representations of the data.
+            </p>
+            <p class="neq-prose" style="margin-top: 10px">
+              Transfer learning involves two sequential phases:
+            </p>
+            <ol class="neq-list">
+              <li>
+                In the <strong>pre-training</strong> phase, a model is trained
+                on a large dataset for a source task. For example, training a
+                language model on billions of words, or a vision model on
+                millions of images. This process teaches the model
+                general-purpose features (edges and textures for images, grammar
+                and semantics for text) that tend to transfer well across tasks.
+              </li>
+              <li>
+                In the <strong>fine-tuning</strong> phase, this pre-trained
+                model is adapted to the specific target task. How this is done
+                depends on the size of the target dataset:
+                <ul class="neq-list">
+                  <li>
+                    If the dataset is quite small, the safer approach is to
+                    freeze all the pre-trained layers and only train the output
+                    layer. This way, you benefit from the rich representations
+                    already learned without risking overfitting the limited
+                    data.
+                  </li>
+                  <li>
+                    If the dataset is larger, use the pre-trained weights as a
+                    smart starting point (rather than random initialisation),
+                    and then train all the parameters of the model. This gives
+                    the model room to adapt more deeply to the nuances of the
+                    task, while still benefiting from the head start that
+                    pre-training provides.
+                  </li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Multi-Task Learning (MTL)</h2>
+      <div class="neq-card">
+        <div class="neq-block">
+          <div class="neq-label text-upper">Concept</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              Multi-task learning involves training a single model to perform
+              multiple related tasks simultaneously by sharing parameters across
+              tasks. This shared representation allows the model to leverage
+              common patterns and improve overall performance and
+              generalisation.
+            </p>
+            <p class="neq-prose" style="margin-top: 10px">
+              For example, for multilabel classification (in which one instance
+              can be associated with multiple classes), instead of training
+              separate binary classifiers for each label, a single neural
+              network can be used. In this setup, the output layer contains one
+              neuron per class, with a sigmoid activation applied to each neuron
+              to produce independent probability scores for each label.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="render-math.js"></script>
+  </body>
+</html>

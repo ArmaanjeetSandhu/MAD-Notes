@@ -9,6 +9,13 @@
       rel="stylesheet"
     />
 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
     <link rel="stylesheet" href="00_styles.css" />
   </head>
   <body>
@@ -192,20 +199,35 @@
                         <ul>
                           <li>
                             <div class="flow-box flow-diamond">
-                              What is the cardinality?
+                              Is it an input feature \(X\), or a target variable
+                              \(y\)?
                             </div>
                             <ul>
                               <li>
-                                <div class="flow-label">HIGH</div>
-                                <div class="flow-box flow-action">
-                                  Use as-is, or normalise
+                                <div class="flow-label">\(\pmb{X}\)</div>
+                                <div class="flow-box flow-diamond">
+                                  What is the cardinality?
                                 </div>
+                                <ul>
+                                  <li>
+                                    <div class="flow-label">HIGH</div>
+                                    <div class="flow-box flow-action">
+                                      Use as-is, or normalise
+                                    </div>
+                                  </li>
+                                  <li>
+                                    <div class="flow-label">LOW</div>
+                                    <div class="flow-box flow-action">
+                                      Perform ordinal encoding; use median, not
+                                      mean
+                                    </div>
+                                  </li>
+                                </ul>
                               </li>
                               <li>
-                                <div class="flow-label">LOW</div>
+                                <div class="flow-label">\(\pmb{y}\)</div>
                                 <div class="flow-box flow-action">
-                                  Perform label encoding;<br />use median, not
-                                  mean
+                                  Perform label encoding; use median, not mean
                                 </div>
                               </li>
                             </ul>
@@ -219,9 +241,25 @@
                     <div class="flow-box flow-pill">Nominal</div>
                     <ul>
                       <li>
-                        <div class="flow-box flow-action">
-                          Perform one-hot encoding
+                        <div class="flow-box flow-diamond">
+                          Is it an input feature \(X\), or a target variable
+                          \(y\)?
                         </div>
+                        <ul>
+                          <li>
+                            <div class="flow-label">\(\pmb{X}\)</div>
+                            <div class="flow-box flow-action">
+                              Perform one-hot encoding
+                            </div>
+                          </li>
+                          <li>
+                            <div class="flow-label">\(\pmb{y}\)</div>
+                            <div class="flow-box flow-action">
+                              Perform label encoding; use mode, not median or
+                              mean
+                            </div>
+                          </li>
+                        </ul>
                       </li>
                     </ul>
                   </li>
@@ -232,5 +270,6 @@
         </td>
       </tr>
     </table>
+    <script src="render-math.js"></script>
   </body>
 </html>

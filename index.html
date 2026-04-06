@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MAD Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+      .hero {
+        text-align: center;
+        margin: 60px 0 40px 0;
+      }
+
+      .hero-title {
+        font-size: 2.8rem;
+        font-weight: 600;
+        color: var(--ink);
+        margin-bottom: 12px;
+        letter-spacing: -0.02em;
+      }
+
+      .hero-subtitle {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        color: var(--ink-3);
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+      }
+
+      .trail-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 60px;
+        padding: 0 20px 80px 20px;
+        width: 100%;
+      }
+
+      .trail-block {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .trail-row {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .trail-row.l2r {
+        flex-direction: row;
+        justify-content: flex-start;
+      }
+
+      .trail-row.r2l {
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+      }
+
+      .trail-row.v-arrow-row {
+        margin: -12px 0 36px 0;
+      }
+
+      .trail-row.v-arrow-row.align-right {
+        justify-content: flex-end;
+      }
+      .trail-row.v-arrow-row.align-left {
+        justify-content: flex-start;
+      }
+
+      .trail-node {
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .trail-link {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--accent-purple);
+        text-decoration: none;
+        text-align: center;
+        padding: 6px 12px;
+        border-radius: 6px;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+
+      .trail-link:hover {
+        background: #e8e2f8;
+        color: var(--ink);
+      }
+
+      .trail-subtext {
+        font-size: 12.5px;
+        color: var(--ink-3);
+        margin-top: 8px;
+        text-align: center;
+        line-height: 1.5;
+        font-style: italic;
+      }
+
+      .h-arrow {
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 31px;
+      }
+
+      .v-arrow-container {
+        width: 250px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .trail-arrow {
+        font-size: 22px;
+        -webkit-text-stroke: 1.2px var(--rule);
+        color: var(--rule);
+        user-select: none;
+        line-height: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="hero">
+        <h1 class="hero-title">MAD Notes</h1>
+        <p class="hero-subtitle">
+          Machine Learning · Artificial Intelligence · Data
+        </p>
+      </div>
+
+      <div id="trail-container" class="trail-container"></div>
+    </div>
+
+    <script>
+      const trailOrder = [
+        { name: "Mind Maps", path: "mind-maps/index.html" },
+        { name: "Regression", path: "regression/index.html" },
+        { name: "Diagnostics", path: "diagnostics/index.html" },
+        { name: "k-Means Clustering", path: "k-means-clustering/index.html" },
+        { name: "Lifecycle", path: "lifecycle/index.html" },
+      ];
+
+      let currentNodesPerRow = 0;
+
+      async function initTrail() {
+        for (let topic of trailOrder) {
+          topic.h2Texts = [];
+          try {
+            const response = await fetch(topic.path);
+            if (response.ok) {
+              const htmlText = await response.text();
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(htmlText, "text/html");
+              const h2Elements = doc.querySelectorAll("h2");
+              topic.h2Texts = Array.from(h2Elements).map((h2) =>
+                h2.textContent.trim(),
+              );
+            }
+          } catch (error) {
+            console.warn(
+              `Could not fetch ${topic.path}. Ensure you are using a local server.`,
+              error,
+            );
+          }
+        }
+
+        renderTrail();
+
+        window.addEventListener("resize", () => {
+          renderTrail();
+        });
+      }
+
+      function renderTrail() {
+        const container = document.getElementById("trail-container");
+
+        const availableWidth = window.innerWidth - 80;
+        let nodesPerRow = Math.floor((availableWidth + 40) / 290);
+        if (nodesPerRow < 1) nodesPerRow = 1;
+
+        if (currentNodesPerRow === nodesPerRow && container.innerHTML !== "")
+          return;
+        currentNodesPerRow = nodesPerRow;
+
+        container.innerHTML = "";
+
+        const block = document.createElement("div");
+        block.className = "trail-block";
+
+        const chunks = [];
+        for (let i = 0; i < trailOrder.length; i += nodesPerRow)
+          chunks.push(trailOrder.slice(i, i + nodesPerRow));
+
+        for (let i = 0; i < chunks.length; i++) {
+          const isL2R = i % 2 === 0;
+          const chunk = chunks[i];
+
+          const rowDiv = document.createElement("div");
+          rowDiv.className = `trail-row ${isL2R ? "l2r" : "r2l"}`;
+
+          for (let j = 0; j < chunk.length; j++) {
+            const topic = chunk[j];
+
+            const nodeDiv = document.createElement("div");
+            nodeDiv.className = "trail-node";
+
+            const link = document.createElement("a");
+            link.href = topic.path;
+            link.className = "trail-link";
+            link.textContent = topic.name;
+            nodeDiv.appendChild(link);
+
+            if (topic.h2Texts && topic.h2Texts.length > 0) {
+              const subtext = document.createElement("div");
+              subtext.className = "trail-subtext";
+              subtext.textContent = topic.h2Texts.join(", ");
+              nodeDiv.appendChild(subtext);
+            }
+            rowDiv.appendChild(nodeDiv);
+
+            if (j < chunk.length - 1) {
+              const hArrowDiv = document.createElement("div");
+              hArrowDiv.className = "h-arrow";
+
+              const arrowSpan = document.createElement("div");
+              arrowSpan.className = "trail-arrow";
+              arrowSpan.innerHTML = isL2R ? "&rarr;" : "&larr;";
+
+              hArrowDiv.appendChild(arrowSpan);
+              rowDiv.appendChild(hArrowDiv);
+            }
+          }
+          block.appendChild(rowDiv);
+
+          if (i < chunks.length - 1) {
+            const vRowDiv = document.createElement("div");
+            vRowDiv.className = `trail-row v-arrow-row ${isL2R ? "align-right" : "align-left"}`;
+
+            const vArrowContainer = document.createElement("div");
+            vArrowContainer.className = "v-arrow-container";
+
+            const vArrowSpan = document.createElement("div");
+            vArrowSpan.className = "trail-arrow";
+            vArrowSpan.innerHTML = "&darr;";
+
+            vArrowContainer.appendChild(vArrowSpan);
+            vRowDiv.appendChild(vArrowContainer);
+            block.appendChild(vRowDiv);
+          }
+        }
+
+        container.appendChild(block);
+      }
+
+      document.addEventListener("DOMContentLoaded", initTrail);
+    </script>
+  </body>
+</html>

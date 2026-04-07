@@ -287,6 +287,36 @@
         z-index: 3;
         letter-spacing: 0.05em;
       }
+
+      .nav-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 60px;
+        padding-top: 24px;
+        border-top: 1px solid var(--rule);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .nav-footer a {
+        color: var(--accent-purple);
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+
+      .nav-footer a:hover {
+        opacity: 0.7;
+      }
+
+      .nav-link-next::after {
+        content: " →";
+      }
+      .nav-footer .nav-home {
+        color: var(--ink-3);
+      }
     </style>
   </head>
   <body>
@@ -570,6 +600,12 @@
         </td>
       </tr>
     </table>
+
+    <div class="nav-footer">
+      <a href="../" class="nav-home">Home</a>
+      <a href="../regression/" class="nav-link-next">Regression</a>
+    </div>
+
     <script src="../render-math.js"></script>
   </body>
 </html>

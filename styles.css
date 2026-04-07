@@ -403,3 +403,36 @@ ol.neq-list > li::before {
   margin-bottom: 6px;
   color: var(--ink-3);
 }
+
+.nav-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.nav-footer a {
+  color: var(--accent-purple);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nav-footer a:hover {
+  opacity: 0.7;
+}
+
+.nav-link-prev::before {
+  content: "← ";
+}
+.nav-link-next::after {
+  content: " →";
+}
+.nav-footer .nav-home {
+  color: var(--ink-3);
+}

@@ -163,7 +163,7 @@
               const htmlText = await response.text();
               const parser = new DOMParser();
               const doc = parser.parseFromString(htmlText, "text/html");
-              const h2Elements = doc.querySelectorAll("h2");
+              const h2Elements = doc.querySelectorAll("h2, .ml-header");
               topic.h2Texts = Array.from(h2Elements).map((h2) =>
                 h2.textContent.trim(),
               );

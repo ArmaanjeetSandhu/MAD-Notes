@@ -74,6 +74,7 @@
         letter-spacing: 0.1em;
         background: #1a1a1a;
         color: #f5f0e8;
+        text-transform: uppercase;
         padding: 10px 14px;
       }
 
@@ -291,67 +292,73 @@
   <body>
     <table>
       <tr>
-        <td colspan="8" class="ml-header">MACHINE LEARNING</td>
+        <td colspan="43" class="ml-header">Machine Learning</td>
       </tr>
 
       <tr class="lp-row">
         <td class="axis-cell axis-lp" rowspan="3">Learning<br />Paradigm</td>
-        <td class="type-cell" colspan="2">
+        <td class="type-cell" colspan="12">
           Supervised<br />
           <span class="desc-cell" style="font-weight: normal"
             >Learns from labelled training data</span
           >
         </td>
-        <td class="type-cell" colspan="4">
+        <td class="type-cell" colspan="24">
           Unsupervised<br />
           <span class="desc-cell" style="font-weight: normal"
             >Discovers patterns in unlabelled data</span
           >
         </td>
-        <td class="type-cell" colspan="1" rowspan="2">
+        <td class="type-cell" colspan="6" rowspan="2">
           Reinforcement Learning
         </td>
       </tr>
 
       <tr class="lp-sub">
-        <td class="sub-cell">Classification</td>
-        <td class="sub-cell">Regression</td>
-        <td class="sub-cell">Clustering</td>
-        <td class="sub-cell">Dimensionality Reduction</td>
-        <td class="sub-cell">Association Rule Learning</td>
-        <td class="sub-cell">Anomaly Detection</td>
+        <td class="sub-cell" colspan="6">Classification</td>
+        <td class="sub-cell" colspan="6">Regression</td>
+        <td class="sub-cell" colspan="6">Clustering</td>
+        <td class="sub-cell" colspan="6">Dimensionality Reduction</td>
+        <td class="sub-cell" colspan="6">Association Rule Learning</td>
+        <td class="sub-cell" colspan="6">Anomaly Detection</td>
       </tr>
 
       <tr class="lp-desc">
-        <td class="desc-cell">
+        <td class="desc-cell" colspan="6">
           Predicts a discrete class label, e.g., softmax regression
         </td>
-        <td class="desc-cell">
+        <td class="desc-cell" colspan="6">
           Predicts a continuous value, e.g., linear regression
         </td>
-        <td class="desc-cell">
+        <td class="desc-cell" colspan="6">
           Groups similar data points, e.g., k-means clustering
         </td>
-        <td class="desc-cell">Reduces number of features, e.g., PCA</td>
-        <td class="desc-cell">Finds co-occurrence rules, e.g., Apriori</td>
-        <td class="desc-cell">Identifies outliers, e.g., Isolation Forest</td>
-        <td class="desc-cell">
+        <td class="desc-cell" colspan="6">
+          Reduces number of features, e.g., PCA
+        </td>
+        <td class="desc-cell" colspan="6">
+          Finds co-occurrence rules, e.g., Apriori
+        </td>
+        <td class="desc-cell" colspan="6">
+          Identifies outliers, e.g., Isolation Forest
+        </td>
+        <td class="desc-cell" colspan="6">
           Agent learns via reward signals, e.g., Q-Learning
         </td>
       </tr>
 
       <tr class="inf-row">
         <td class="axis-cell axis-inf" rowspan="2">Inference<br />Approach</td>
-        <td class="type-cell" colspan="4">Instance-based</td>
-        <td class="type-cell" colspan="3">Model-based</td>
+        <td class="type-cell" colspan="21">Instance-based</td>
+        <td class="type-cell" colspan="21">Model-based</td>
       </tr>
 
       <tr class="inf-desc">
-        <td class="desc-cell" colspan="4">
+        <td class="desc-cell" colspan="21">
           Model memorises training data and makes predictions by comparing new
           data points to stored instances, e.g., k-NN, SVM
         </td>
-        <td class="desc-cell" colspan="3">
+        <td class="desc-cell" colspan="21">
           Model learns a general rule or function from training data that can be
           applied to new, unseen data, e.g., linear regression
         </td>
@@ -359,22 +366,22 @@
 
       <tr class="pro-row">
         <td class="axis-cell axis-pro" rowspan="2">Processing<br />Mode</td>
-        <td class="type-cell" colspan="2">Batch</td>
-        <td class="type-cell" colspan="3">Out-of-Core</td>
-        <td class="type-cell" colspan="2">Online</td>
+        <td class="type-cell" colspan="14">Batch</td>
+        <td class="type-cell" colspan="14">Out-of-Core</td>
+        <td class="type-cell" colspan="14">Online</td>
       </tr>
 
       <tr class="pro-desc">
-        <td class="desc-cell" colspan="2">
+        <td class="desc-cell" colspan="14">
           Processes entire dataset at once; model trained completely, then
           deployed without further learning, e.g., SVM
         </td>
-        <td class="desc-cell" colspan="3">
+        <td class="desc-cell" colspan="14">
           Processes large datasets in chunks that fit in memory; updates model
           incrementally through multiple passes, e.g., mini-batch gradient
           descent
         </td>
-        <td class="desc-cell" colspan="2">
+        <td class="desc-cell" colspan="14">
           Updates model continuously as each new data point arrives; no need to
           store historical data, e.g., online gradient descent
         </td>
@@ -385,7 +392,7 @@
 
     <table>
       <tr>
-        <td colspan="13" class="ml-header">DATA TYPES</td>
+        <td colspan="13" class="ml-header">Data Types</td>
       </tr>
 
       <tr class="lp-row">

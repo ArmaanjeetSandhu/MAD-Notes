@@ -436,3 +436,19 @@ ol.neq-list > li::before {
 .nav-footer .nav-home {
   color: var(--ink-3);
 }
+
+.nav-footer > * {
+  flex: 1;
+}
+
+.nav-footer > :first-child {
+  text-align: left;
+}
+
+.nav-footer > :nth-child(2) {
+  text-align: center;
+}
+
+.nav-footer > :last-child {
+  text-align: right;
+}

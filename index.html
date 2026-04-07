@@ -145,11 +145,11 @@
 
     <script>
       const trailOrder = [
-        { name: "Mind Maps", path: "mind-maps/index.html" },
-        { name: "Regression", path: "regression/index.html" },
-        { name: "Diagnostics", path: "diagnostics/index.html" },
-        { name: "k-Means Clustering", path: "k-means-clustering/index.html" },
-        { name: "Lifecycle", path: "lifecycle/index.html" },
+        { name: "Mind Maps", path: "mind-maps" },
+        { name: "Regression", path: "regression" },
+        { name: "Diagnostics", path: "diagnostics" },
+        { name: "k-Means Clustering", path: "k-means-clustering" },
+        { name: "Lifecycle", path: "lifecycle" },
       ];
 
       let currentNodesPerRow = 0;
@@ -158,7 +158,7 @@
         for (let topic of trailOrder) {
           topic.h2Texts = [];
           try {
-            const response = await fetch(topic.path);
+            const response = await fetch(`${topic.path}/index.html`);
             if (response.ok) {
               const htmlText = await response.text();
               const parser = new DOMParser();

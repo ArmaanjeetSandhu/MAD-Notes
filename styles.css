@@ -75,9 +75,9 @@ body {
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   min-width: 1100px;
-  border: 1px solid var(--rule);
 }
 
 .text-upper {
@@ -98,10 +98,6 @@ table {
   width: 15%;
 }
 
-.main-table thead th:not(:last-child) {
-  border-right: 2px solid var(--rule);
-}
-
 .dataset-table {
   min-width: 600px;
 }
@@ -110,11 +106,6 @@ table {
 .dataset-table th {
   text-align: center;
   border-right: 1px solid var(--rule);
-}
-
-.dataset-table td:last-child,
-.dataset-table th:last-child {
-  border-right: none;
 }
 
 .dataset-table th,
@@ -135,10 +126,7 @@ thead tr.top-header th {
 
 thead tr.top-header th.th-empty {
   background: transparent !important;
-  border-top: hidden !important;
-  border-left: hidden !important;
-  border-right: 1px solid var(--rule);
-  border-bottom: 1.5px solid var(--rule);
+  border: hidden !important;
 }
 
 thead tr.top-header th.th-sca,
@@ -207,6 +195,10 @@ th.sub-lin-v,
 td.td-lin-v {
   background: var(--col-lin-v-bg);
   border-right: 1px solid var(--col-lin-v-border);
+}
+
+td.td-lin-v[colspan="2"] {
+  border-right: 2px solid var(--rule);
 }
 
 th.sub-log-v,
@@ -451,4 +443,47 @@ ol.neq-list > li::before {
 
 .nav-footer > :last-child {
   text-align: right;
+}
+
+thead tr:first-child th {
+  border-top: 1px solid var(--rule);
+}
+tbody td {
+  border-bottom: 1px solid var(--rule);
+}
+
+tr > :last-child {
+  border-right: 1px solid var(--rule);
+}
+
+thead tr.top-header th:first-child,
+tbody td.td-label {
+  border-left: 1px solid var(--rule);
+}
+
+thead tr:first-child th:first-child {
+  border-top-left-radius: 8px;
+}
+thead tr:first-child th:last-child {
+  border-top-right-radius: 8px;
+}
+tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+.main-table thead tr.top-header th.th-empty + th {
+  border-top-left-radius: 8px;
+  border-left: 1px solid var(--rule);
+}
+
+.main-table thead tr.sub-header th:first-child {
+  border-left: 1px solid var(--rule);
+}
+
+.main-table tbody tr:first-child td:first-child {
+  border-top-left-radius: 8px;
+  border-top: 1px solid var(--rule);
 }

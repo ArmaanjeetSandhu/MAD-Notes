@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Density Estimation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      col.c-empty {
+        width: 1%;
+        white-space: nowrap;
+      }
+      td.td-section-header {
+        width: 1%;
+        white-space: nowrap;
+        padding: 14px 18px;
+        text-align: center;
+        vertical-align: middle;
+        background: #e8e2f8;
+        border-bottom: 1.5px solid var(--header-border);
+        border-right: 1px solid var(--rule);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: var(--accent-purple);
+      }
+      td.td-section-header span {
+        display: inline-block;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <h2 class="section-title">Univariate Gaussian Density Estimation</h2>
+      <div class="table-wrap">
+        <table class="main-table phase-table">
+          <colgroup>
+            <col class="c-empty" />
+            <col class="c-label" />
+            <col class="c-lin-v" />
+            <col class="c-log-v" />
+            <col class="c-lin-m" />
+            <col class="c-log-m" />
+          </colgroup>
+
+          <thead>
+            <tr class="top-header">
+              <th class="th-empty" rowspan="2"></th>
+              <th class="th-empty" rowspan="2"></th>
+              <th colspan="2" class="th-vec">
+                <span class="text-upper">Scalar Notation</span>
+                <span class="header-desc">one feature</span>
+              </th>
+              <th colspan="2">
+                <span class="text-upper">Vector Notation</span>
+                <span class="header-desc">all features at once</span>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td class="td-section-header" rowspan="2">
+                <span>Training</span>
+              </td>
+              <td class="td-label">
+                <span class="text-upper">Mean</span>
+              </td>
+              <td class="td-lin-v" colspan="2">
+                <div class="eq">
+                  \(\mu_j = \dfrac{1}{m}\displaystyle\sum_{i=1}^{m} x_j^{(i)}\)
+                </div>
+              </td>
+              <td class="td-lin-m" colspan="2">
+                <div class="eq">
+                  \(\vec{\mu} = \bigl[\mu_1\;\; \mu_2\;\; \cdots\;\;
+                  \mu_n\bigr]\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Variance</span>
+              </td>
+              <td class="td-lin-v" colspan="2">
+                <div class="eq">
+                  \(\sigma_j^2 = \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}
+                  (x_j^{(i)} - \mu_j)^2\)
+                </div>
+              </td>
+              <td class="td-lin-m" colspan="2">
+                <div class="eq">
+                  \(\vec{\sigma}^2 = \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}
+                  (\vec{x}^{(i)} - \vec{\mu})^{\odot 2}\)
+                </div>
+                <div class="eq">
+                  \( = \bigl[\sigma_1^2\;\; \sigma_2^2\;\; \cdots\;\;
+                  \sigma_n^2\bigr]\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-section-header" rowspan="3">
+                <span>Inference</span>
+              </td>
+              <td class="td-label">
+                <span class="text-upper">Per-Feature Probability Density</span>
+              </td>
+              <td class="td-lin-v" colspan="2">
+                <div class="eq">
+                  \(p(x_j \mid \mu_j, \sigma_j^2) = \dfrac{1}{\sigma_j
+                  \sqrt{2\pi}} \enspace e^{\dfrac{-1}{2} \left(\dfrac{x_j -
+                  \mu_j}{\sigma_j}\right)^2}\)
+                </div>
+              </td>
+              <td class="td-lin-m" colspan="2">
+                <div class="eq">
+                  \(p(\vec{x} \mid \vec{\mu}, \vec{\sigma}^2) = (\mathbf{1}_{1
+                  \times n} \oslash \sqrt{2\pi} \,\, \vec{\sigma}) \odot
+                  e^{\displaystyle \frac{-1}{2} [(\vec{x} - \vec{\mu}) \oslash
+                  \vec{\sigma}]^{\odot 2}}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Joint Probability Density</span>
+              </td>
+              <td class="td-lin-v" colspan="2">
+                <div class="eq">
+                  \(p(x) = \displaystyle\prod_{j=1}^n p(x_j \mid \mu_j,
+                  \sigma_j^2)\)
+                </div>
+              </td>
+              <td class="td-lin-m" colspan="2">
+                <div class="eq">
+                  \(p(\vec{x}) = \displaystyle\prod p(\vec{x} \mid \vec{\mu},
+                  \vec{\sigma}^2)\)
+                </div>
+                <div class="note">
+                  product of elements in the per-feature density vector
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Model /<br />Prediction</span>
+              </td>
+              <td class="td-lin-v" colspan="2">
+                <div class="eq">
+                  \(\hat{y} = \begin{cases} 1 & \text{if } p(x) < \epsilon \\ 0
+                  & \text{otherwise} \end{cases}\)
+                </div>
+              </td>
+              <td class="td-lin-m" colspan="2">
+                <div class="eq">
+                  \(\hat{y} = \begin{cases} 1 & \text{if } p(\vec{x}) < \epsilon
+                  \\ 0 & \text{otherwise} \end{cases}\)
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nav-footer"></div>
+    <script src="../navigation.js"></script>
+
+    <script src="../render-math.js"></script>
+  </body>
+</html>

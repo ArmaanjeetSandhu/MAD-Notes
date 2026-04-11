@@ -3,6 +3,7 @@ const trailOrder = [
   { name: "Regression", path: "regression" },
   { name: "Diagnostics", path: "diagnostics" },
   { name: "k-Means Clustering", path: "k-means-clustering" },
+  { name: "Density Estimation", path: "density-estimation" },
   { name: "Lifecycle", path: "lifecycle" },
 ];
 

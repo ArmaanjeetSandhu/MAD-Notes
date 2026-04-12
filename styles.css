@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. VARIABLES
+   VARIABLES
    ========================================================================== */
 :root {
   --ink: #1a1814;
@@ -32,7 +32,7 @@
 }
 
 /* ==========================================================================
-   2. RESETS & BASE STYLES
+   RESETS & BASE STYLES
    ========================================================================== */
 * {
   box-sizing: border-box;
@@ -60,7 +60,7 @@ body {
 }
 
 /* ==========================================================================
-   3. LAYOUT & UTILITIES
+   LAYOUT & UTILITIES
    ========================================================================== */
 .page {
   max-width: 1400px;
@@ -82,7 +82,7 @@ body {
 }
 
 /* ==========================================================================
-   4. TABLES: GENERAL & LAYOUT
+   TABLES: GENERAL & LAYOUT
    ========================================================================== */
 .table-wrap {
   overflow-x: auto;
@@ -115,7 +115,7 @@ table {
 }
 
 /* ==========================================================================
-   5. TABLES: HEADERS & CELLS
+   TABLES: HEADERS & CELLS
    ========================================================================== */
 td {
   padding: 18px 18px;
@@ -185,7 +185,7 @@ thead tr.sub-header th {
 }
 
 /* ==========================================================================
-   6. TABLES: SPECIFIC CELL COLORS
+   TABLES: SPECIFIC CELL COLOURS
    ========================================================================== */
 td.td-label {
   background: var(--col-label-bg);
@@ -247,7 +247,7 @@ td.td-mat-shared {
 }
 
 /* ==========================================================================
-   7. EQUATIONS & MATH (KATEX)
+   EQUATIONS & MATH (KATEX)
    ========================================================================== */
 .eq {
   font-size: 14px;
@@ -267,7 +267,7 @@ td.td-mat-shared {
 }
 
 /* ==========================================================================
-   8. COMPONENT: NEQ CARD
+   COMPONENT: NEQ CARD
    ========================================================================== */
 .neq-card {
   border: 1px solid var(--rule);
@@ -374,7 +374,7 @@ ol.neq-list > li::before {
 }
 
 /* ==========================================================================
-   9. COMPONENT: NOTES & GRIDS
+   COMPONENT: NOTES & GRIDS
    ========================================================================== */
 .note {
   font-size: 11.5px;
@@ -424,7 +424,7 @@ ol.neq-list > li::before {
 }
 
 /* ==========================================================================
-   10. NAVIGATION FOOTER
+   NAVIGATION FOOTER
    ========================================================================== */
 .nav-footer {
   display: flex;
@@ -478,7 +478,7 @@ ol.neq-list > li::before {
 }
 
 /* ==========================================================================
-   11. BORDERS & EDGE CASES (TABLE RADIUS OVERRIDES)
+   BORDERS & EDGE CASES (TABLE RADIUS OVERRIDES)
    ========================================================================== */
 thead tr:first-child th {
   border-top: 1px solid var(--rule);
@@ -544,4 +544,77 @@ tbody tr:last-child td:last-child {
 
 .phase-table tbody tr:last-child td:first-child {
   border-bottom-left-radius: 0;
+}
+
+/* ==========================================================================
+   SEARCH BAR COMPONENT
+   ========================================================================== */
+.search-container {
+  position: relative;
+  margin: 0 auto 32px auto;
+  width: 100%;
+  max-width: 1400px;
+  z-index: 100;
+}
+
+#site-search {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  background: var(--page);
+  border: 1.5px solid var(--rule);
+  border-radius: 8px;
+  color: var(--ink);
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+#site-search:focus {
+  border-color: var(--header-border);
+  box-shadow: 0 0 0 3px rgba(200, 196, 240, 0.3);
+}
+
+.search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  display: block;
+  padding: 12px 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--accent-purple);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.2s;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background: #e8e2f8;
+  color: var(--ink);
+}
+
+.search-result-empty {
+  padding: 12px 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--ink-3);
+  text-align: center;
+  font-style: italic;
 }

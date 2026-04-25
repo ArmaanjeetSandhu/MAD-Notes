@@ -1,6 +1,7 @@
 const trailOrder = [
   { name: "Mind Maps", path: "mind-maps" },
   { name: "Regression", path: "regression" },
+  { name: "Classification", path: "classification" },
   { name: "Diagnostics", path: "diagnostics" },
   { name: "k-Means Clustering", path: "k-means-clustering" },
   { name: "Density Estimation", path: "density-estimation" },

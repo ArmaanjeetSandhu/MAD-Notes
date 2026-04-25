@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <h2 class="section-title">Data Matrix Blueprint</h2>
+      <div class="table-wrap">
+        <table class="dataset-table">
+          <thead>
+            <tr class="top-header">
+              <th style="width: 25%">
+                <span class="text-upper">Observations \ Features</span>
+              </th>
+              <th>\(x_1\)</th>
+              <th>\(x_2\)</th>
+              <th>\(x_3\)</th>
+              <th>\(\dots\)</th>
+              <th>\(x_n\)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-label">1</td>
+              <td>\(x_1^{(1)}\)</td>
+              <td>\(x_2^{(1)}\)</td>
+              <td>\(x_3^{(1)}\)</td>
+              <td>\(\dots\)</td>
+              <td>\(x_n^{(1)}\)</td>
+            </tr>
+            <tr>
+              <td class="td-label">2</td>
+              <td>\(x_1^{(2)}\)</td>
+              <td>\(x_2^{(2)}\)</td>
+              <td>\(x_3^{(2)}\)</td>
+              <td>\(\dots\)</td>
+              <td>\(x_n^{(2)}\)</td>
+            </tr>
+            <tr>
+              <td class="td-label">3</td>
+              <td>\(x_1^{(3)}\)</td>
+              <td>\(x_2^{(3)}\)</td>
+              <td>\(x_3^{(3)}\)</td>
+              <td>\(\dots\)</td>
+              <td>\(x_n^{(3)}\)</td>
+            </tr>
+            <tr>
+              <td class="td-label">\(\vdots\)</td>
+              <td>\(\vdots\)</td>
+              <td>\(\vdots\)</td>
+              <td>\(\vdots\)</td>
+              <td>\(\ddots\)</td>
+              <td>\(\vdots\)</td>
+            </tr>
+            <tr>
+              <td class="td-label">m</td>
+              <td>\(x_1^{(m)}\)</td>
+              <td>\(x_2^{(m)}\)</td>
+              <td>\(x_3^{(m)}\)</td>
+              <td>\(\dots\)</td>
+              <td>\(x_n^{(m)}\)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="section-title">Logistic Regression</h2>
+      <div class="table-wrap">
+        <table class="main-table">
+          <colgroup>
+            <col class="c-label" />
+            <col class="c-log-v" />
+            <col class="c-log-m" />
+          </colgroup>
+
+          <thead>
+            <tr class="top-header">
+              <th class="th-empty"></th>
+              <th class="th-vec">
+                <span class="text-upper">Vector Notation</span>
+                <span class="header-desc">one observation</span>
+              </th>
+              <th>
+                <span class="text-upper">Matrix Notation</span>
+                <span class="header-desc">all observations at once</span>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Features</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(\vec{x}^{(i)} = \begin{bmatrix} x_1^{(i)} & x_2^{(i)} &
+                  \cdots & x_n^{(i)} \end{bmatrix}_{1 \times n}\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(X_{n \times m} = \left[\begin{array}{cccc} | & | & & | \\
+                  \vec{x}^{(1)} & \vec{x}^{(2)} & \cdots & \vec{x}^{(m)} \\ | &
+                  | & & | \end{array}\right]\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Weights</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(\vec{w} = \begin{bmatrix} w_1 & w_2 & \cdots & w_n
+                  \end{bmatrix}_{1 \times n}\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(W_{n \times 1} = \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_n
+                  \end{bmatrix}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Bias</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">\(b\)</div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(B_{1 \times m} = \bigl[\,b\;\; b\;\; \cdots\;\; b\,\bigr]\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Output Labels</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">\(y^{(i)} \in \{0, 1\}\)</div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(Y_{1 \times m} = \bigl[\,y^{(1)}\;\; y^{(2)}\;\; \cdots\;\;
+                  y^{(m)}\,\bigr]\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Logits</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(z^{(i)} = \vec{w}\cdot\vec{x}^{(i)} + b\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">\(Z_{1 \times m} = W^{\top}X + B\)</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Model /<br />Prediction</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(\hat{y}^{(i)} = \sigma(z^{(i)})\)
+                  <br />
+                  \(= \dfrac{1}{1 + e^{-z^{(i)}}}\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">\(\hat{Y}_{1 \times m} = \sigma(Z)\)</div>
+                <div class="note">(sigmoid is applied element-wise)</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Loss</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(L\!\left(\hat{y}^{(i)}, y^{(i)}\right) =
+                  -\!\left[y^{(i)}\log\hat{y}^{(i)} +
+                  \left(1\!-\!y^{(i)}\right)\log\!\left(1\!-\!\hat{y}^{(i)}\right)\right]\)
+                  <br />
+                  \(= \begin{cases} -\log \hat{y}^{(i)} & \text{if } y^{(i)} = 1
+                  \\[1ex] -\log\!\left(1 - \hat{y}^{(i)}\right) & \text{if }
+                  y^{(i)} = 0 \end{cases}\)
+                </div>
+                <div class="note">BCE (Binary Cross-Entropy) / Log Loss</div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(L\!\left(\hat{Y}, Y\right) = -\!\left[Y \odot \log\hat{Y} +
+                  (\mathbf{1}_{1 \times m}\!-\!Y) \odot \log(\mathbf{1}_{1
+                  \times m}\!-\!\hat{Y})\right]\)
+                </div>
+                <div class="note">
+                  BCE (Binary Cross-Entropy) / Log Loss<br />(log is applied
+                  element-wise)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Cost / Error</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(J(\vec{w}, b) = \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}
+                  L\!\left(\hat{y}^{(i)}, y^{(i)}\right)\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(J(W, B) = \dfrac{1}{m}\cdot\mathbf{1}_{1 \times m}\cdot
+                  L(\hat{Y}, Y)^{\top}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Cost Gradient<br />(weights)</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial w_j} =
+                  \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}\!\left(\hat{y}^{(i)}-y^{(i)}\right)
+                  x_j^{(i)}\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial W} =
+                  \dfrac{1}{m}\,X\!\left(\hat{Y} - Y\right)^{\!\top}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper"
+                  >Gradient Descent<br />Update (weights)</span
+                >
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(w_j := w_j - \alpha\,\dfrac{\partial J}{\partial w_j}\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(W := W - \alpha\,\dfrac{\partial J}{\partial W}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Cost Gradient<br />(bias)</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial b} =
+                  \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}\!\left(\hat{y}^{(i)}-y^{(i)}\right)\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial B} =
+                  \dfrac{1}{m}\cdot\mathbf{1}_{1 \times
+                  m}\cdot\left(\hat{Y}-Y\right)^{\!\top}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper"
+                  >Gradient Descent<br />Update (bias)</span
+                >
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(b := b - \alpha\,\dfrac{\partial J}{\partial b}\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(B := B - \alpha\,\dfrac{\partial J}{\partial B}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Regularisation Term</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(\dfrac{\lambda}{2m}\displaystyle\sum_{j=1}^{n} w_j^2\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">\(\dfrac{\lambda}{2m}\,W^{\top}W\)</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Regularisation Gradient</span>
+              </td>
+              <td class="td-log-v">
+                <div class="eq">
+                  \(\dfrac{\partial}{\partial w_j} \left( \dfrac{\lambda}{2m}
+                  \displaystyle\sum_{j=1}^{n} w_j^2 \right) = \dfrac{\lambda}{m}
+                  w_j\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(\dfrac{\partial}{\partial W} \left( \dfrac{\lambda}{2m}
+                  W^{\top}W \right) = \dfrac{\lambda}{m} W\)
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="section-title">Softmax Regression</h2>
+      <div class="table-wrap">
+        <table class="main-table">
+          <colgroup>
+            <col class="c-label" />
+            <col class="c-log-s" />
+            <col class="c-lin-m" />
+            <col class="c-log-m" />
+          </colgroup>
+
+          <thead>
+            <tr class="top-header">
+              <th class="th-empty" rowspan="2"></th>
+              <th class="th-sca">
+                <span class="text-upper">Vector Notation</span>
+              </th>
+              <th colspan="2">
+                <span class="text-upper">Matrix Notation</span>
+              </th>
+            </tr>
+            <tr class="sub-header">
+              <th class="sub-log-s">
+                <span class="header-desc">one observation</span>
+              </th>
+              <th class="sub-lin-m">
+                <span class="header-desc">one observation</span>
+              </th>
+              <th class="sub-log-m">
+                <span class="header-desc">all observations at once</span>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Features</span>
+              </td>
+              <td class="td-sca-shared">
+                <div class="eq">
+                  \(\vec{x}^{(i)} = \begin{bmatrix} x_1^{(i)} & x_2^{(i)} &
+                  \cdots & x_n^{(i)} \end{bmatrix}_{1 \times n}\)
+                </div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">
+                  \(X^{(i)}_{n \times 1} = \begin{bmatrix} x_1^{(i)} \\
+                  x_2^{(i)} \\ \vdots \\ x_n^{(i)} \end{bmatrix}\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(X_{n \times m} = \left[\begin{array}{cccc} | & | & & | \\
+                  \vec{x}^{(1)} & \vec{x}^{(2)} & \cdots & \vec{x}^{(m)} \\ | &
+                  | & & | \end{array}\right]\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Weights</span>
+              </td>
+              <td class="td-log-s">
+                <div class="eq">
+                  \(\vec{w}_c = \begin{bmatrix} w_{c,1} & w_{c,2} & \cdots &
+                  w_{c,n} \end{bmatrix}_{1 \times n}\)
+                </div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">
+                  \(W_{n \times K} = \left[\begin{array}{cccc} | & | & & | \\
+                  \vec{w}_1 & \vec{w}_2 & \cdots & \vec{w}_K \\ | & | & & |
+                  \end{array}\right]\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Bias</span>
+              </td>
+              <td class="td-log-s">
+                <div class="eq">\(b_c\)</div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">
+                  \(B_{K \times 1} = \begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_K
+                  \end{bmatrix}\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(B_{K \times m} = \begin{bmatrix} b_1 & b_1 & \cdots & b_1 \\
+                  b_2 & b_2 & \cdots & b_2 \\ \vdots & \vdots & \ddots & \vdots
+                  \\ b_K & b_K & \cdots & b_K \end{bmatrix}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Output Label</span>
+              </td>
+              <td class="td-log-s">
+                <div class="eq">\(\vec{y}^{(i)} \in \{0,1\}^{K}\)</div>
+                <div class="note" style="margin-top: 0px">one-hot vector</div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">
+                  \(Y^{(i)}_{K \times 1} = \begin{bmatrix} y_1^{(i)} \\
+                  y_2^{(i)} \\ \vdots \\ y_K^{(i)} \end{bmatrix}\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(Y_{K \times m} = \left[\begin{array}{cccc} | & | & & | \\
+                  \vec{y}^{(1)} & \vec{y}^{(2)} & \cdots & \vec{y}^{(m)} \\ | &
+                  | & & | \end{array}\right]\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Logits</span>
+              </td>
+              <td class="td-log-s">
+                <div class="eq">
+                  \(z_c^{(i)} = \vec{w}_c\cdot\vec{x}^{(i)} + b_c\)
+                </div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">
+                  \(Z^{(i)}_{K \times 1} = W^{\top}X^{(i)} + B\)
+                  <br />
+                  \(= \begin{bmatrix} z_1^{(i)} \\ z_2^{(i)} \\ \vdots \\
+                  z_K^{(i)} \end{bmatrix}\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">\(Z_{K \times m} = W^{\top}X + B\)</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Model /<br />Prediction</span>
+              </td>
+              <td class="td-log-s">
+                <div class="eq">
+                  \(a^{(i)}_c = \operatorname{softmax}(\vec{z}^{(i)})_c =
+                  \dfrac{e^{z_c^{(i)}}}{\displaystyle\sum_{k=1}^{K}
+                  e^{z_k^{(i)}}}\)
+                </div>
+                <div class="note">
+                  \(\vec{a}^{(i)} = \begin{bmatrix}a_1^{(i)} & \cdots &
+                  a_K^{(i)}\end{bmatrix}\)
+                </div>
+                <div class="note">
+                  \(\displaystyle\sum_{c=1}^{K} a_c^{(i)} = 1\)
+                </div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">
+                  \(A^{(i)} = \operatorname{softmax}\!\left(Z^{(i)}\right)\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(A_{K \times m} = \operatorname{softmax}(Z)\)
+                </div>
+                <div class="note">softmax applied column-wise</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label" rowspan="2">
+                <span class="text-upper">Loss</span>
+              </td>
+              <td class="td-log-s">
+                <div class="eq">
+                  \(L\!\left(\vec{a}^{(i)}, \vec{y}^{(i)}\right)\)
+                </div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">\(L\!\left(A^{(i)}, Y^{(i)}\right)\)</div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">\(L\!\left(A, Y\right)\)</div>
+              </td>
+            </tr>
+            <tr>
+              <td class="td-log-s">
+                <div class="eq">
+                  \(-\displaystyle\sum_{k=1}^{K} y_k^{(i)}\,\log a_k^{(i)}\)
+                  <br />
+                  \(= -\log a_c^{(i)} \quad \text{if } y_c^{(i)} = 1\)
+                </div>
+                <div class="note">Categorical Cross-Entropy</div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">\(-\,{Y^{(i)}}^{\!\top} \log A^{(i)}\)</div>
+                <div class="note">Categorical Cross-Entropy</div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(-\mathbf{1}_{K \times 1}^{\top}(Y \odot \log A)\)
+                </div>
+                <div class="note">Categorical Cross-Entropy</div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Cost / Error</span>
+              </td>
+              <td class="td-log-s">
+                <div class="eq">
+                  \(J\!\left(W, \vec{b}\right) =
+                  \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}
+                  L\!\left(\vec{a}^{(i)}, \vec{y}^{(i)}\right)\)
+                </div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">
+                  \(J\!\left(W, B\right) =
+                  \dfrac{1}{m}\displaystyle\sum_{i=1}^{m} L\!\left(A^{(i)},
+                  Y^{(i)}\right)\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(J\!\left(W, B\right) = -\dfrac{1}{m}\,\mathbf{1}_{K \times
+                  1}^{\top}(Y \odot \log A)\,\mathbf{1}_{m \times 1}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Cost Gradient<br />(weights)</span>
+              </td>
+              <td class="td-log-s">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial w_{c,j}} =
+                  \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}\!\left(a_c^{(i)}-y_c^{(i)}\right)
+                  x_j^{(i)}\)
+                </div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial W} =
+                  \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}
+                  X^{(i)}\!\left(A^{(i)}-Y^{(i)}\right)^{\!\top}\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial W} = \dfrac{1}{m}\,X\!\left(A -
+                  Y\right)^{\!\top}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper"
+                  >Gradient Descent<br />Update (weights)</span
+                >
+              </td>
+              <td class="td-log-s">
+                <div class="eq">
+                  \(\vec{w}_c := \vec{w}_c - \alpha\,\dfrac{\partial J}{\partial
+                  \vec{w}_c}\)
+                </div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">
+                  \(W := W - \alpha\,\dfrac{\partial J}{\partial W}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper">Cost Gradient<br />(bias)</span>
+              </td>
+              <td class="td-log-s">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial b_c} =
+                  \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}\!\left(a_c^{(i)}-y_c^{(i)}\right)\)
+                </div>
+              </td>
+              <td class="td-lin-m">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial B} =
+                  \dfrac{1}{m}\displaystyle\sum_{i=1}^{m}\!\left(A^{(i)}-Y^{(i)}\right)\)
+                </div>
+              </td>
+              <td class="td-log-m">
+                <div class="eq">
+                  \(\dfrac{\partial J}{\partial B} = \dfrac{1}{m}\,(A -
+                  Y)\,\mathbf{1}\)
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="td-label">
+                <span class="text-upper"
+                  >Gradient Descent<br />Update (bias)</span
+                >
+              </td>
+              <td class="td-log-s">
+                <div class="eq">
+                  \(b_c := b_c - \alpha\,\dfrac{\partial J}{\partial b_c}\)
+                </div>
+              </td>
+              <td class="td-mat-shared" colspan="2">
+                <div class="eq">
+                  \(B := B - \alpha\,\dfrac{\partial J}{\partial B}\)
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="nav-footer"></div>
+    <script src="../navigation.js"></script>
+
+    <script src="../render-math.js"></script>
+  </body>
+</html>

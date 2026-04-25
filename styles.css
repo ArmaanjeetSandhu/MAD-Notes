@@ -428,53 +428,38 @@ ol.neq-list > li::before {
    ========================================================================== */
 .nav-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
   margin-top: 60px;
   padding-top: 24px;
   border-top: 1px solid var(--rule);
   font-family: "JetBrains Mono", monospace;
-  font-size: 13px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
-.nav-footer a {
+.nav-trail-link {
   color: var(--accent-purple);
   text-decoration: none;
   transition: opacity 0.2s;
 }
 
-.nav-footer a:hover {
+.nav-trail-link:hover {
   opacity: 0.7;
 }
 
-.nav-link-prev::before {
-  content: "← ";
+.nav-trail-current {
+  color: var(--ink);
+  font-weight: 600;
 }
 
-.nav-link-next::after {
-  content: " →";
-}
-
-.nav-footer .nav-home {
-  color: var(--ink-3);
-}
-
-.nav-footer > * {
-  flex: 1;
-}
-
-.nav-footer > :first-child {
-  text-align: left;
-}
-
-.nav-footer > :nth-child(2) {
-  text-align: center;
-}
-
-.nav-footer > :last-child {
-  text-align: right;
+.nav-trail-sep {
+  color: var(--rule);
+  margin: 0 4px;
+  user-select: none;
 }
 
 /* ==========================================================================

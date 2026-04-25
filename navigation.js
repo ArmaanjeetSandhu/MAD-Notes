@@ -1,38 +1,49 @@
+const homePage = { name: "Home", path: "" };
+
 const trailOrder = [
   { name: "Mind Maps", path: "mind-maps" },
   { name: "Regression", path: "regression" },
   { name: "Classification", path: "classification" },
   { name: "Diagnostics", path: "diagnostics" },
+  { name: "Decision Trees", path: "decision-trees" },
   { name: "k-Means Clustering", path: "k-means-clustering" },
   { name: "Density Estimation", path: "density-estimation" },
   { name: "Lifecycle", path: "lifecycle" },
 ];
+
+const fullTrailOrder = [homePage, ...trailOrder];
 
 let siteContentCache = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   const footer = document.querySelector(".nav-footer");
   if (footer) {
-    const currentIndex = trailOrder.findIndex((topic) =>
-      window.location.href.includes(`/${topic.path}/`),
+    const inSubfolder = trailOrder.some((t) =>
+      window.location.href.includes(`/${t.path}/`),
     );
 
-    if (currentIndex !== -1) {
-      let footerHTML = "";
-      if (currentIndex > 0) {
-        const prev = trailOrder[currentIndex - 1];
-        footerHTML += `<a href="../${prev.path}/" class="nav-link-prev">${prev.name}</a>\n`;
-      } else footerHTML += `<span></span>\n`;
+    const currentIndex = fullTrailOrder.findIndex((topic) =>
+      topic.path === ""
+        ? !inSubfolder
+        : window.location.href.includes(`/${topic.path}/`),
+    );
 
-      footerHTML += `<a href="../" class="nav-home">Home</a>\n`;
+    const visibleTrail = inSubfolder ? fullTrailOrder : trailOrder;
 
-      if (currentIndex < trailOrder.length - 1) {
-        const next = trailOrder[currentIndex + 1];
-        footerHTML += `<a href="../${next.path}/" class="nav-link-next">${next.name}</a>\n`;
-      } else footerHTML += `<span></span>\n`;
+    const trailItems = visibleTrail.map((topic) => {
+      const isCurrent = fullTrailOrder.indexOf(topic) === currentIndex;
 
-      footer.innerHTML = footerHTML;
-    }
+      let href;
+      if (topic.path === "") href = "../";
+      else href = inSubfolder ? `../${topic.path}/` : `${topic.path}/`;
+
+      if (isCurrent)
+        return `<span class="nav-trail-current">${topic.name}</span>`;
+      else return `<a href="${href}" class="nav-trail-link">${topic.name}</a>`;
+    });
+
+    const separator = `<span class="nav-trail-sep">→</span>`;
+    footer.innerHTML = trailItems.join(separator);
   }
 
   const pageContainer = document.querySelector(".page") || document.body;

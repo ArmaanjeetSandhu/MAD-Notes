@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decision Trees</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <h2 class="section-title">Decision Trees</h2>
+      <div class="neq-card">
+        <div class="neq-block">
+          <div class="neq-label text-upper">Concept</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              A decision tree splits the data into different branches based on
+              feature values. The tree structure consists of
+              <strong>internal nodes</strong> (each of which represents a
+              decision or test based on a specific feature) and
+              <strong>leaf nodes</strong> (each of which represents the
+              predicted outcome or class label).
+            </p>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Objective</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              The objective, used to decide which feature to split on at each
+              node, is to decrease impurity (i.e., maximise information gain):
+            </p>
+            <ul class="neq-list">
+              <li>
+                In <strong>classification</strong>, impurity is measured by
+                <em>entropy</em> or <em>Gini impurity</em>
+              </li>
+              <li>
+                In <strong>regression</strong>, impurity is measured by
+                <em>variance</em>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="neq-divider"></div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Stopping Criteria</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              To prevent overfitting, the recursive splitting process is halted
+              on the basis of one of the following criteria:
+            </p>
+            <ul class="neq-list">
+              <li>when a node is 100% pure (contains only one class)</li>
+              <li>
+                when splitting a node will result in the tree exceeding a
+                defined maximum depth
+              </li>
+              <li>
+                when the decrease in impurity is below a certain threshold
+              </li>
+              <li>
+                when the number of target values (samples) at a node is below a
+                certain threshold
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title" style="margin-top: 40px">Tree Ensembles</h2>
+      <div class="neq-card">
+        <div class="neq-block">
+          <div class="neq-label text-upper">Concept</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              A single decision tree can be highly sensitive to small changes in
+              the training data, which often leads to high variance. This is why
+              multiple trees, called a <strong>tree ensemble</strong>, are used.
+            </p>
+            <p class="neq-prose" style="margin-top: 8px">
+              The final prediction is the combination of the predictions of all
+              the individual trees:
+            </p>
+            <ul class="neq-list">
+              <li>
+                In <strong>classification</strong>, this combination is the
+                majority consensus (mode) of the predicted classes
+              </li>
+              <li>
+                In <strong>regression</strong>, this combination is the mean of
+                the predicted values
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-footer"></div>
+    <script src="../navigation.js"></script>
+    <script src="../render-math.js"></script>
+  </body>
+</html>

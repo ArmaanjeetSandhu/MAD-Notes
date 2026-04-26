@@ -36,8 +36,6 @@
           </div>
         </div>
 
-        <div class="neq-divider"></div>
-
         <div class="neq-block">
           <div class="neq-label text-upper">Objective</div>
           <div class="neq-body">
@@ -58,7 +56,130 @@
           </div>
         </div>
 
-        <div class="neq-divider"></div>
+        <div class="neq-block">
+          <div class="neq-label text-upper">Variables &<br />Notation</div>
+          <div class="neq-body">
+            <table
+              style="
+                margin: 0 10% 0 auto;
+                width: auto;
+                border: none;
+                min-width: auto;
+              "
+            >
+              <tbody>
+                <tr style="border: none">
+                  <td
+                    style="
+                      padding: 4px 16px 4px 0;
+                      border: none;
+                      text-align: center;
+                      white-space: nowrap;
+                    "
+                    class="eq"
+                  >
+                    \(\mathcal{I}\)
+                  </td>
+                  <td
+                    style="padding: 4px 0; border: none; text-align: left"
+                    class="neq-prose"
+                  >
+                    Impurity function
+                  </td>
+                </tr>
+                <tr style="border: none">
+                  <td
+                    style="
+                      padding: 4px 16px 4px 0;
+                      border: none;
+                      text-align: center;
+                      white-space: nowrap;
+                    "
+                    class="eq"
+                  >
+                    \(v\)
+                  </td>
+                  <td
+                    style="padding: 4px 0; border: none; text-align: left"
+                    class="neq-prose"
+                  >
+                    Index of a child node (\(v = 1, \dots, V\)), where \(V\) is
+                    the total number of child nodes produced by a split
+                  </td>
+                </tr>
+                <tr style="border: none">
+                  <td
+                    style="
+                      padding: 4px 16px 4px 0;
+                      border: none;
+                      text-align: center;
+                      white-space: nowrap;
+                    "
+                    class="eq"
+                  >
+                    \(S^{(v)}\)
+                  </td>
+                  <td
+                    style="padding: 4px 0; border: none; text-align: left"
+                    class="neq-prose"
+                  >
+                    The set of training samples at node \(v\)
+                  </td>
+                </tr>
+                <tr style="border: none">
+                  <td
+                    style="
+                      padding: 4px 16px 4px 0;
+                      border: none;
+                      text-align: center;
+                      white-space: nowrap;
+                    "
+                    class="eq"
+                  >
+                    \(S^{\text{parent}}\)
+                  </td>
+                  <td
+                    style="padding: 4px 0; border: none; text-align: left"
+                    class="neq-prose"
+                  >
+                    The set of training samples at the parent node, i.e., the
+                    node currently being split
+                  </td>
+                </tr>
+                <tr style="border: none">
+                  <td
+                    style="
+                      padding: 4px 16px 4px 0;
+                      border: none;
+                      text-align: center;
+                      white-space: nowrap;
+                    "
+                    class="eq"
+                  >
+                    \(w^{(v)} = \dfrac{|S^{(v)}|}{|S^{\text{parent}}|}\)
+                  </td>
+                  <td
+                    style="padding: 4px 0; border: none; text-align: left"
+                    class="neq-prose"
+                  >
+                    The proportion of training samples from the parent node that
+                    flow into the child node \(v\)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="neq-block">
+          <div class="neq-label text-upper">Information Gain</div>
+          <div class="neq-body">
+            <div class="eq neq-eq">
+              \(\mathcal{I}(S^{\text{parent}}) - \displaystyle\sum_{v=1}^{V}
+              w^{(v)} \cdot \mathcal{I}(S^{(v)})\)
+            </div>
+          </div>
+        </div>
 
         <div class="neq-block">
           <div class="neq-label text-upper">Stopping Criteria</div>

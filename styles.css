@@ -284,6 +284,10 @@ td.td-mat-shared {
   align-items: stretch;
 }
 
+.neq-block:not(:last-child) {
+  border-bottom: 1px solid var(--col-lin-m-border);
+}
+
 .neq-label {
   flex: 0 0 180px;
   background: var(--col-label-bg);
@@ -333,8 +337,7 @@ td.td-mat-shared {
 }
 
 .neq-divider {
-  height: 1px;
-  background: var(--col-lin-m-border);
+  display: none;
 }
 
 .neq-list {

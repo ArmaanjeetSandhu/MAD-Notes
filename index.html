@@ -148,7 +148,7 @@
       let currentNodesPerRow = 0;
 
       async function initTrail() {
-        for (let topic of trailOrder) {
+        const fetchPromises = trailOrder.map(async (topic) => {
           topic.h2Texts = [];
           try {
             const response = await fetch(`${topic.path}/index.html`);
@@ -167,7 +167,9 @@
               error,
             );
           }
-        }
+        });
+
+        await Promise.all(fetchPromises);
 
         renderTrail();
 

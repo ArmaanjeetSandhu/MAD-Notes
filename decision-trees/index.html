@@ -182,6 +182,43 @@
         </div>
 
         <div class="neq-block">
+          <div class="neq-label text-upper">High-Cardinality<br />Bias</div>
+          <div class="neq-body">
+            <p class="neq-prose">
+              Features with a large number of unique values (i.e., higher values
+              of \(V\)) tend to yield higher information gain by default, simply
+              because they create more, smaller, purer child nodes. For example,
+              in the extreme case, if a feature has a unique value for every
+              observation, the split creates \(m\) branches, each containing a
+              single data point. Since each branch is perfectly pure, this
+              results in the maximum possible information gain. However, such a
+              split is completely useless for generalisation to new data.
+            </p>
+            <p class="neq-prose" style="margin-top: 8px">
+              To avoid this, there are two approaches:
+            </p>
+            <ol class="neq-list">
+              <li>
+                Use the <em>gain ratio</em>, which normalises the information
+                gain by dividing it by the <em>intrinsic value</em> (a.k.a.
+                <em>split information</em>) of a split:
+                <br />
+                <div class="eq neq-eq">
+                  \(\dfrac{\mathcal{I}(S^{\text{parent}}) -
+                  \displaystyle\sum_{v=1}^{V} w^{(v)} \cdot
+                  \mathcal{I}(S^{(v)})}{-\displaystyle\sum_{v=1}^{V} w^{(v)}
+                  \log_2 w^{(v)}}\)
+                </div>
+              </li>
+              <li>
+                Perform one-hot encoding of the high-cardinality feature(s) and
+                proceed with a binary split (\(V = 2\))
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="neq-block">
           <div class="neq-label text-upper">Stopping Criteria</div>
           <div class="neq-body">
             <p class="neq-prose">

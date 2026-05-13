@@ -178,12 +178,82 @@
         });
       }
 
+      function getNodesPerRow() {
+        const availableWidth = window.innerWidth - 80;
+        return Math.max(1, Math.floor((availableWidth + 40) / 290));
+      }
+
+      function buildChunks(items, size) {
+        const chunks = [];
+        for (let i = 0; i < items.length; i += size)
+          chunks.push(items.slice(i, i + size));
+        return chunks;
+      }
+
+      function createTopicNode(topic) {
+        const nodeDiv = document.createElement("div");
+        nodeDiv.className = "trail-node";
+
+        const link = document.createElement("a");
+        link.href = topic.path;
+        link.className = "trail-link";
+        link.textContent = topic.name;
+        nodeDiv.appendChild(link);
+
+        if (topic.h2Texts && topic.h2Texts.length > 0) {
+          const subtext = document.createElement("div");
+          subtext.className = "trail-subtext";
+          subtext.textContent = topic.h2Texts.join(", ");
+          nodeDiv.appendChild(subtext);
+        }
+
+        return nodeDiv;
+      }
+
+      function createHorizontalArrow(isL2R) {
+        const hArrowDiv = document.createElement("div");
+        hArrowDiv.className = "h-arrow";
+
+        const arrowSpan = document.createElement("div");
+        arrowSpan.className = "trail-arrow";
+        arrowSpan.innerHTML = isL2R ? "&rarr;" : "&larr;";
+
+        hArrowDiv.appendChild(arrowSpan);
+        return hArrowDiv;
+      }
+
+      function createVerticalArrowRow(isL2R) {
+        const vRowDiv = document.createElement("div");
+        vRowDiv.className = `trail-row v-arrow-row ${isL2R ? "align-right" : "align-left"}`;
+
+        const vArrowContainer = document.createElement("div");
+        vArrowContainer.className = "v-arrow-container";
+
+        const vArrowSpan = document.createElement("div");
+        vArrowSpan.className = "trail-arrow";
+        vArrowSpan.innerHTML = "&darr;";
+
+        vArrowContainer.appendChild(vArrowSpan);
+        vRowDiv.appendChild(vArrowContainer);
+        return vRowDiv;
+      }
+
+      function createTrailRow(chunk, isL2R) {
+        const rowDiv = document.createElement("div");
+        rowDiv.className = `trail-row ${isL2R ? "l2r" : "r2l"}`;
+
+        chunk.forEach((topic, index) => {
+          rowDiv.appendChild(createTopicNode(topic));
+          if (index < chunk.length - 1)
+            rowDiv.appendChild(createHorizontalArrow(isL2R));
+        });
+
+        return rowDiv;
+      }
+
       function renderTrail() {
         const container = document.getElementById("trail-container");
-
-        const availableWidth = window.innerWidth - 80;
-        let nodesPerRow = Math.floor((availableWidth + 40) / 290);
-        if (nodesPerRow < 1) nodesPerRow = 1;
+        const nodesPerRow = getNodesPerRow();
 
         if (currentNodesPerRow === nodesPerRow && container.innerHTML !== "")
           return;
@@ -194,67 +264,14 @@
         const block = document.createElement("div");
         block.className = "trail-block";
 
-        const chunks = [];
-        for (let i = 0; i < trailOrder.length; i += nodesPerRow)
-          chunks.push(trailOrder.slice(i, i + nodesPerRow));
+        const chunks = buildChunks(trailOrder, nodesPerRow);
 
-        for (let i = 0; i < chunks.length; i++) {
-          const isL2R = i % 2 === 0;
-          const chunk = chunks[i];
-
-          const rowDiv = document.createElement("div");
-          rowDiv.className = `trail-row ${isL2R ? "l2r" : "r2l"}`;
-
-          for (let j = 0; j < chunk.length; j++) {
-            const topic = chunk[j];
-
-            const nodeDiv = document.createElement("div");
-            nodeDiv.className = "trail-node";
-
-            const link = document.createElement("a");
-            link.href = topic.path;
-            link.className = "trail-link";
-            link.textContent = topic.name;
-            nodeDiv.appendChild(link);
-
-            if (topic.h2Texts && topic.h2Texts.length > 0) {
-              const subtext = document.createElement("div");
-              subtext.className = "trail-subtext";
-              subtext.textContent = topic.h2Texts.join(", ");
-              nodeDiv.appendChild(subtext);
-            }
-            rowDiv.appendChild(nodeDiv);
-
-            if (j < chunk.length - 1) {
-              const hArrowDiv = document.createElement("div");
-              hArrowDiv.className = "h-arrow";
-
-              const arrowSpan = document.createElement("div");
-              arrowSpan.className = "trail-arrow";
-              arrowSpan.innerHTML = isL2R ? "&rarr;" : "&larr;";
-
-              hArrowDiv.appendChild(arrowSpan);
-              rowDiv.appendChild(hArrowDiv);
-            }
-          }
-          block.appendChild(rowDiv);
-
-          if (i < chunks.length - 1) {
-            const vRowDiv = document.createElement("div");
-            vRowDiv.className = `trail-row v-arrow-row ${isL2R ? "align-right" : "align-left"}`;
-
-            const vArrowContainer = document.createElement("div");
-            vArrowContainer.className = "v-arrow-container";
-
-            const vArrowSpan = document.createElement("div");
-            vArrowSpan.className = "trail-arrow";
-            vArrowSpan.innerHTML = "&darr;";
-
-            vArrowContainer.appendChild(vArrowSpan);
-            vRowDiv.appendChild(vArrowContainer);
-            block.appendChild(vRowDiv);
-          }
-        }
+        chunks.forEach((chunk, index) => {
+          const isL2R = index % 2 === 0;
+          block.appendChild(createTrailRow(chunk, isL2R));
+          if (index < chunks.length - 1)
+            block.appendChild(createVerticalArrowRow(isL2R));
+        });
 
         container.appendChild(block);
       }

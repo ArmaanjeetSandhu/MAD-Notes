@@ -19,13 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const footer = document.querySelector(".nav-footer");
   if (footer) {
     const inSubfolder = trailOrder.some((t) =>
-      window.location.href.includes(`/${t.path}/`),
+      globalThis.location.href.includes(`/${t.path}/`),
     );
 
     const currentIndex = fullTrailOrder.findIndex((topic) =>
       topic.path === ""
         ? !inSubfolder
-        : window.location.href.includes(`/${topic.path}/`),
+        : globalThis.location.href.includes(`/${topic.path}/`),
     );
 
     const visibleTrail = inSubfolder ? fullTrailOrder : trailOrder;
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const pageContainer = document.querySelector(".page") || document.body;
   if (pageContainer) {
     const inSubfolder = trailOrder.some((topic) =>
-      window.location.href.includes(`/${topic.path}/`),
+      globalThis.location.href.includes(`/${topic.path}/`),
     );
     const basePath = inSubfolder ? "../" : "./";
 

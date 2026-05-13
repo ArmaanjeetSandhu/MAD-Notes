@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   renderMathInElement(document.body, {
     delimiters: [
-      { left: "\\(", right: "\\)", display: false },
-      { left: "\\[", right: "\\]", display: true },
+      { left: String.raw`\(`, right: String.raw`\)`, display: false },
+      { left: String.raw`\[`, right: String.raw`\]`, display: true },
     ],
     throwOnError: false,
   });

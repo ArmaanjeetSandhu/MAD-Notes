@@ -199,15 +199,16 @@
         content: "";
         position: absolute;
         top: 0;
-        right: 50%;
+        right: calc(50% - var(--dx, 0px));
         border-top: 1.5px solid #1a1a1a;
-        width: 50%;
+        width: calc(50% + var(--dx, 0px));
         height: 40px;
       }
 
       .tree li::after {
         right: auto;
-        left: 50%;
+        left: calc(50% + var(--dx, 0px));
+        width: calc(50% - var(--dx, 0px));
         border-left: 1.5px solid #1a1a1a;
       }
 
@@ -233,7 +234,7 @@
         content: "";
         position: absolute;
         top: 0;
-        left: 50%;
+        left: calc(50% + var(--pdx, 0px));
         border-left: 1.5px solid #1a1a1a;
         width: 0;
         height: 40px;
@@ -242,6 +243,7 @@
 
       .flow-box {
         margin: 0 auto;
+        transform: translateX(var(--dx, 0px));
         background: #fff;
         border: 1.5px solid #1a1a1a;
         padding: 12px 16px;
@@ -281,7 +283,7 @@
       .flow-label {
         position: absolute;
         top: 12px;
-        left: 50%;
+        left: calc(50% + var(--dx, 0px));
         transform: translateX(-50%);
         background: #f5f0e8;
         padding: 4px 10px;
@@ -695,5 +697,76 @@
     <script src="../navigation.js"></script>
 
     <script src="../render-math.js"></script>
+
+    <script>
+      (function () {
+        function balanceTree() {
+          document.querySelectorAll(".tree").forEach(function (tree) {
+            var nodes = Array.prototype.slice.call(tree.querySelectorAll("li"));
+
+            nodes
+              .map(function (li) {
+                var d = 0,
+                  el = li;
+                while (el && el !== tree) {
+                  d++;
+                  el = el.parentElement;
+                }
+                return { li: li, depth: d };
+              })
+              .sort(function (a, b) {
+                return b.depth - a.depth;
+              })
+              .forEach(function (entry) {
+                var li = entry.li;
+                var ul = li.querySelector(":scope > ul");
+                var dx = 0;
+
+                if (ul) {
+                  var kids = Array.prototype.slice
+                    .call(ul.children)
+                    .filter(function (el) {
+                      return el.tagName === "LI";
+                    });
+                  if (kids.length) {
+                    var centre = function (kid) {
+                      var r = kid.getBoundingClientRect();
+                      return (
+                        r.left + r.width / 2 + (Number.parseFloat(kid.dataset.dx) || 0)
+                      );
+                    };
+                    var mid =
+                      (centre(kids[0]) + centre(kids[kids.length - 1])) / 2;
+                    var r = li.getBoundingClientRect();
+                    dx = mid - (r.left + r.width / 2);
+                  }
+                  ul.style.setProperty("--pdx", dx + "px");
+                }
+
+                li.dataset.dx = dx;
+                li.style.setProperty("--dx", dx + "px");
+              });
+          });
+        }
+
+        var queued;
+        function schedule() {
+          cancelAnimationFrame(queued);
+          queued = requestAnimationFrame(balanceTree);
+        }
+
+        schedule();
+        window.addEventListener("load", schedule);
+        window.addEventListener("resize", schedule);
+        if (document.fonts && document.fonts.ready)
+          document.fonts.ready.then(schedule);
+
+        new MutationObserver(schedule).observe(document.body, {
+          childList: true,
+          subtree: true,
+          characterData: true,
+        });
+      })();
+    </script>
   </body>
 </html>

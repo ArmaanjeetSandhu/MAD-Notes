@@ -272,7 +272,10 @@ td.td-mat-shared {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   background: var(--page);
   margin-bottom: 48px;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(900px, 1fr);
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .neq-block {
@@ -298,7 +301,7 @@ td.td-mat-shared {
   text-align: center;
   padding: 18px 14px;
   line-height: 1.7;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .neq-label--math {
